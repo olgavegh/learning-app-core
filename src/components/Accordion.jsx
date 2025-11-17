@@ -43,12 +43,12 @@ function Accordion({ id, parentId, question = "Default Question", answer = "defa
                 </label>
                 <div className="accordion-body">
                     <p>{answer}</p>
-                    <div>{codesnippet && codesnippet.map((code, index) => (
-                        <div key={index}>
+                    <div>{codesnippet && 
+                        <div>
                             <SyntaxHighlighter language="javascript" style={docco}>
-                                {code.replace(/;/g, ';\n')}
+                                {codesnippet.replace(/;/g, ';\n')}
                             </SyntaxHighlighter></div>
-                    ))}
+                    }
                     </div>
                 </div>
 

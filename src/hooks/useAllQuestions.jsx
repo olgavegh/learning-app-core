@@ -12,7 +12,6 @@ export default function useQuestions() {
       const transformedData = transformFireBase(data)
       setQuestions(transformedData);
       setQuestionsLoading(false);
-
     }).catch(err => setError(err.message))
   }, []);
 

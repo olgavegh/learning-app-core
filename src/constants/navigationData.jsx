@@ -6,6 +6,7 @@ import StudyPage from "../pages/StudyPage";
 import MatchingPage from "../pages/MatchingPage";
 import TestPage from "../pages/TestPage";
 import BookmarkedPage from "../pages/BookmarkedPage";
+import AdminPage from "../pages/AdminPage"
 
 export const PAGES = {
   DASHBOARD: "dashboard",
@@ -13,6 +14,7 @@ export const PAGES = {
   MATCHING: "matching",
   TEST: "test",
   BOOKMARKS: "bookmarks",
+  ADMIN: "admin",
 };
 
 export const FEATURE_ITEMS = [
@@ -60,6 +62,17 @@ export const FEATURE_ITEMS = [
       "Save your favorite questions and challenging topics for later review. Organize your study materials and track questions you want to revisit before your assessment.",
     icon: "🔖",
     component: <BookmarkedPage />,
+  },
+  {
+    id: PAGES.ADMIN,
+    text: "Admin",
+    activity: false,
+    order: 7,
+    backgroundColor: "rgb(253, 253, 256)",
+    description:
+      "Admin site",
+    icon: "🔖",
+    component: <AdminPage />,
   },
 ];
 
