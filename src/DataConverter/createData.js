@@ -40,9 +40,14 @@ function processQuestion(block, category, level) {
   const rest = lines.slice(1).join("\n");
 
   const codeMatches = [...rest.matchAll(/```(?:javascript|js)?([\s\S]*?)```/g)];
-  const codeSnippets = codeMatches.map((m) =>
-    m[1].replace(/[\r\n]/g, " ").replace(/\s+/g, " ").trim()
-  );
+  let codeSnippets = codeMatches
+    .map(m => m[1].trim())
+    .join("\n\n");
+
+  codeSnippets = codeSnippets
+    .replace(/[\r\n]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
 
   let answer = rest
     .replace(/```[\s\S]*?```/g, "")

@@ -9,6 +9,7 @@ export const PAGES = {
   TEST: "test",
   QUIZ: "quiz",
   BOOKMARKS: "bookmarks",
+  ADMIN: "admin",
 };
 
 export const FEATURE_ITEMS = [
@@ -60,6 +61,16 @@ export const FEATURE_ITEMS = [
     backgroundColor: "rgb(253, 253, 256)",
     description:
       "Save your favorite questions and challenging topics for later review. Organize your study materials and track questions you want to revisit before your assessment.",
+    icon: "🔖",
+  },
+  {
+    id: PAGES.ADMIN,
+    text: "Admin",
+    activity: false,
+    order: 7,
+    backgroundColor: "rgb(253, 253, 256)",
+    description:
+      "Admin site",
     icon: "🔖",
   },
 ];

@@ -1,7 +1,7 @@
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
-function QuestionCard({ id, question, answer, codesnippet, mark, onUpdate, isAccordion, }) {
+function QuestionCard({ id, question, answer, codesnippet, mark, onUpdate }) {
 
   const handleToggle = () => {
     onUpdate(id, !mark)
@@ -22,12 +22,12 @@ function QuestionCard({ id, question, answer, codesnippet, mark, onUpdate, isAcc
 
       <p>{answer}</p>
 
-      <div>{codesnippet && codesnippet.map((code, index) => (
-        <div key={index}>
+      <div>{codesnippet &&
+        <div >
           <SyntaxHighlighter language="javascript" style={docco}>
-            {code.replace(/;/g, ';\n')}
+            {codesnippet.replace(/;/g, ';\n')}
           </SyntaxHighlighter></div>
-        ))}
+        }
       </div>
     </div>
   )

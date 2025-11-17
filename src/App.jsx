@@ -7,6 +7,7 @@ import Header from "./components/Header";
 import DashBoard from "./pages/DashBoard";
 import Footer from "./components/Footer";
 import MatchingPage from "./pages/MatchingPage";
+import AdminPage from "./pages/AdminPage";
 
 function App() {
   const { currentPage, navigateToPage } = usePageNavigation()
@@ -20,6 +21,7 @@ function App() {
         {currentPage === "matching" && <MatchingPage />}
         {currentPage === "test" && <TestPage />}
         {currentPage === "bookmarks" && <BookmarkedPage />}
+        {currentPage === "admin" && <AdminPage />}
       </div>
       <Footer />
     </>
