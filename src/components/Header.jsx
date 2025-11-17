@@ -1,4 +1,5 @@
 import { getNavItems } from "../constants/navigationData";
+import UserBtns from "./UserBtns";
 
 function Header({ currentPage, navigateToPage }) {
 
@@ -13,6 +14,8 @@ function Header({ currentPage, navigateToPage }) {
 					<button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 						<span className="navbar-toggler-icon"></span>
 					</button>
+
+					<UserBtns />
 
 					<div className="collapse navbar-collapse align-items-center" id="navbarNav">
 						<ul className="navbar-nav ms-auto align-items-center">
