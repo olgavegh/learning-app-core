@@ -4,7 +4,6 @@ import FilterContainer from "../components/FilterContainer.jsx";
 import { useState } from "react"
 import AdminQuestionCard from "../components/AdminQuestionCard.jsx";
 import AdminQuestionForm from "../components/AdminQuestionForm.jsx";
-import { getAllCategories } from "../constants/getAllCategories.js";
 
 export default function AdminPage() {
   const { questions, loading, error, errorMessage } = useAllQuestions();
@@ -16,7 +15,6 @@ export default function AdminPage() {
   });
 
   const numQuestion = filteredQuestions?.length
-
 
   const handleSubmit = () => {
 
