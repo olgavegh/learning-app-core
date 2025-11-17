@@ -6,7 +6,7 @@ function Header({ currentPage, navigateToPage }) {
 	return (
 		<>
 			<nav className="navbar navbar-expand-lg">
-				<div className="container-fluid align-items-center">
+				<div className="container-fluid">
 					<a className="navbar-brand" href="#" onClick={() => navigateToPage('dashboard')}>
 						Codey
 					</a>
@@ -15,9 +15,10 @@ function Header({ currentPage, navigateToPage }) {
 						<span className="navbar-toggler-icon"></span>
 					</button>
 
-					<UserBtns />
-
-					<div className="collapse navbar-collapse align-items-center" id="navbarNav">
+					<div className="collapse navbar-collapse" id="navbarNav">
+						<div className="d-flex align-items-center me-auto">
+							<UserBtns />
+						</div>
 						<ul className="navbar-nav ms-auto align-items-center">
 							{getNavItems(currentPage).map((page, index) => (
 								<li key={index} className="nav-item fw-semibold">
