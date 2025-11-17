@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export function CardContent({ title = 'STUDY Mode', description = 'Scrollable list or card deck of all questions + answers. Clean, readable layout for quick review. "Mark as learned" toggle per question.', backgroundColor }) {
     return (
         <div className="d-block border border-2 border-dark p-4 p-md-5 hard-shadow w-100 h-100 position-relative"
@@ -16,11 +18,11 @@ export function CardContent({ title = 'STUDY Mode', description = 'Scrollable li
 }
 
 // clickable container
-export function CardLink({ onClick, children }) {
+export function CardLink({ to, onClick, children }) {
     return (
-        <a href="#" className="col" onClick={onClick}>
+        <Link to={to} className="col text-decoration-none" onClick={onClick}>
             {children}
-        </a>
+        </Link>
     )
 
 }

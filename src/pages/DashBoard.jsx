@@ -2,8 +2,9 @@ import { CardContent, CardLink, CardContainer } from "../components/CardComponen
 import Badge from "../components/Badge"
 import TitleContainer from '../components/TitleContainer';
 import { getDashboardCards } from "../constants/navigationData";
+import { Link } from "react-router-dom"
 
-function DashBoard({ navigateToPage }) {
+function DashBoard() {
 
 
     return (
@@ -19,7 +20,7 @@ function DashBoard({ navigateToPage }) {
                 <Badge textContent={"Choose a mode"} />
                 <CardContainer>
                     {getDashboardCards().map(card => (
-                        <CardLink key={card.id} onClick={() => navigateToPage(card.page)}>
+                        <CardLink key={card.id} to={`/${card.page}`}>
                             <CardContent
                                 key={card.id}
                                 backgroundColor={card.backgroundColor}

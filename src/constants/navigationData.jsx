@@ -2,12 +2,17 @@
 // APP NAVIGATION & PAGES DATA
 // ====================================
 
+import StudyPage from "../pages/StudyPage";
+import MatchingPage from "../pages/MatchingPage";
+import TestPage from "../pages/TestPage";
+import BookmarkedPage from "../pages/BookmarkedPage";
+import AdminPage from "../pages/AdminPage"
+
 export const PAGES = {
   DASHBOARD: "dashboard",
   STUDY: "study",
   MATCHING: "matching",
   TEST: "test",
-  QUIZ: "quiz",
   BOOKMARKS: "bookmarks",
   ADMIN: "admin",
 };
@@ -22,6 +27,7 @@ export const FEATURE_ITEMS = [
     description:
       'Scrollable list or card deck of all questions + answers. Clean, readable layout for quick review. "Mark as learned" toggle per question.',
     icon: "📚",
+    component: <StudyPage />,
   },
   {
     id: PAGES.MATCHING,
@@ -32,6 +38,7 @@ export const FEATURE_ITEMS = [
     description:
       "Interactive matching game where you connect questions with their correct answers. Perfect for memory retention and quick recall practice.",
     icon: "🎯",
+    component: <MatchingPage />,
   },
   {
     id: PAGES.TEST,
@@ -42,26 +49,19 @@ export const FEATURE_ITEMS = [
     description:
       "You get a random question from the selected topic(s) and three answer options. Choose the good one!",
     icon: "✅",
+    component: <TestPage />,
   },
-  {
-    id: PAGES.QUIZ,
-    text: "AI Quiz",
-    activity: false,
-    order: 5,
-    backgroundColor: "rgb(248, 214, 179)",
-    description:
-      "Allow the learner to type answers in natural language (not multiple-choice), and get instant, friendly, AI-generated feedback that judges whether their answer is correct, partially correct, or incorrect — with a short explanation.",
-    icon: "🤖",
-  },
+
   {
     id: PAGES.BOOKMARKS,
     text: "Bookmarked",
     activity: false,
     order: 6,
-    backgroundColor: "rgb(253, 253, 256)",
+    backgroundColor: "rgb(248, 214, 179)",
     description:
       "Save your favorite questions and challenging topics for later review. Organize your study materials and track questions you want to revisit before your assessment.",
     icon: "🔖",
+    component: <BookmarkedPage />,
   },
   {
     id: PAGES.ADMIN,
@@ -72,6 +72,7 @@ export const FEATURE_ITEMS = [
     description:
       "Admin site",
     icon: "🔖",
+    component: <AdminPage />,
   },
 ];
 
@@ -109,6 +110,7 @@ export function getNavItems(currentPage) {
     id: item.id,
     text: item.text,
     activity: item.id === currentPage,
+    component: item.component,
   }));
 }
 

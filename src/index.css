@@ -3,7 +3,7 @@
 
 :root {
   font-family: "Lexend Mega", Helvetica, Arial, sans-serif;
-  font-size: 20px;
+  font-size: 18px;
   line-height: 1.5;
   font-weight: 400;
 
@@ -102,6 +102,16 @@ p {
 /* ====================================
   NAVBAR COLLAPSE OVERLAY
 =====================================*/
+/* HEADER NAV ITEMS */
+header {
+  width: 100%;
+}
+.nav-item {
+  transition: all 0.3s ease;
+  padding: 0.7em 1em;
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+}
 
 @media (max-width: 900px) {
   .navbar-collapse {
@@ -205,21 +215,6 @@ p {
 
 .accordion-button:not(.collapsed):hover {
   background-color: rgb(248, 248, 130);
-}
-
-/* HEADER NAV ITEMS */
-
-.nav-link {
-  transition: all 0.3s ease;
-  &.active {
-    transform: translateY(0);
-    text-decoration: underline;
-    font-weight: 600;
-  }
-  &:hover {
-    color: #ffdb58 !important;
-    transform: translateY(-1px);
-  }
 }
 
 /* ====================================
