@@ -71,8 +71,7 @@ function Navbar() {
 		}
 	}
 	return (
-		<header header >
-
+		<header>
 			<nav className="navbar navbar-expand-lg sticky-top">
 				<div className="container-fluid">
 					<Link to="/" className="navbar-brand">Codey</Link>
@@ -104,15 +103,13 @@ function Navbar() {
 						</ul>
 					</div>
 				</div>
-
-				{<div>
-					{user ? (<div>{user.email} is signed in</div>) : (<div>No user signed in</div>)}
-					{error && <div style={{ color: 'red' }}>{error}</div>}
-					{message && <div style={{ color: 'green' }}>{message}</div>}
-				</div>}
 			</nav>
+			{/*<div>
+				{user ? (<div>{user.email} is signed in</div>) : (<div>No user signed in</div>)}
+				{error && <div style={{ color: 'red' }}>{error}</div>}
+				{message && <div style={{ color: 'green' }}>{message}</div>}
+			</div>*/}
 		</header>
-
 	)
 }
 
