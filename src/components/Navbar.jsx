@@ -73,12 +73,6 @@ function Navbar() {
 	return (
 		<header header >
 
-			{/*<div>
-        {user ? (<div>{user.email} is signed in</div>) : (<div>No user signed in</div>)}
-        {error && <div style={{ color: 'red' }}>{error}</div>}
-        {message && <div style={{ color: 'green' }}>{message}</div>}
-      </div>*/}
-
 			<nav className="navbar navbar-expand-lg sticky-top">
 				<div className="container-fluid">
 					<Link to="/" className="navbar-brand">Codey</Link>
@@ -90,6 +84,7 @@ function Navbar() {
 					<div className="collapse navbar-collapse" id="navbarNav">
 						<div className="d-flex align-items-center me-auto">
 							<UserBtns
+								user={user}
 								onSignUp={handleSignUp}
 								onSignIn={handleSignIn}
 								onSignOut={handleSignOut}
@@ -109,6 +104,12 @@ function Navbar() {
 						</ul>
 					</div>
 				</div>
+
+				{<div>
+					{user ? (<div>{user.email} is signed in</div>) : (<div>No user signed in</div>)}
+					{error && <div style={{ color: 'red' }}>{error}</div>}
+					{message && <div style={{ color: 'green' }}>{message}</div>}
+				</div>}
 			</nav>
 		</header>
 
