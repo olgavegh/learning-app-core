@@ -101,8 +101,5 @@ async function createData(question) {
   }
 }
 
-for (let i = 0; i < allQuestions.length; i++) {
-  const question = { ...allQuestions[i], id: i + 1 };
-  await createData(question);
-}
+await createData(allQuestions)
 

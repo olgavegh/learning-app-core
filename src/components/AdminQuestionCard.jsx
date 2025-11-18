@@ -1,7 +1,11 @@
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import DeleteButton from './DeleteButton';
+import { useNavigate } from 'react-router';
 
-function AdminQuestionCard({ id, question, answer, codesnippet, level, category }) {
+function AdminQuestionCard({ id, question, answer, codesnippet, level, category, onDelete }) {
+
+  const navigate = useNavigate()
 
   return (
     <div className={id}>
@@ -17,8 +21,8 @@ function AdminQuestionCard({ id, question, answer, codesnippet, level, category 
           </SyntaxHighlighter></div>
         }
       </div>
-      <button>Edit</button>
-      <button>Delete</button>
+      <button onClick={() => navigate(`/updater/${id}`)}>Update (navigate to update page)</button>
+      <DeleteButton onDelete={onDelete} id={id}></DeleteButton>
     </div>
   )
 }
