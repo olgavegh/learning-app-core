@@ -89,6 +89,7 @@ function App() {
             <div className="collapse navbar-collapse" id="navbarNav">
               <div className="d-flex align-items-center me-auto">
                 <UserBtns
+                  user={user}
                   onSignUp={handleSignUp}
                   onSignIn={handleSignIn}
                   onSignOut={handleSignOut}
@@ -111,11 +112,11 @@ function App() {
         </nav>
       </header>
 
-      {/*<div>
+      {<div>
         {user ? (<div>{user.email} is signed in</div>) : (<div>No user signed in</div>)}
         {error && <div style={{ color: 'red' }}>{error}</div>}
         {message && <div style={{ color: 'green' }}>{message}</div>}
-      </div>*/}
+      </div>}
 
       <Routes>
         <Route path="/" element={<DashBoard />} />
