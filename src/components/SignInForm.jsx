@@ -1,23 +1,14 @@
-import { useState, /*useEffect*/ } from 'react';
+import { useState } from 'react';
 import { auth } from '../firebase';
 import {
-  //onAuthStateChanged,
   signInWithEmailAndPassword,
 } from 'firebase/auth';
 
 function SignInForm() {
   const [message, setMessage] = useState("");
   const [error, setError] = useState(null);
-  //const [user, setUser] = useState(null);
-  const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-
-  /*useEffect(() => {
-    onAuthStateChanged(auth, (currentUser) => {
-      console.log('The user\'s auth state changed:', currentUser);
-      setUser(currentUser);
-    })
-  }, [])*/
+  const [password, setPassword] = useState("");
 
   async function handleSignIn() {
     setError(null);

@@ -1,9 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import { auth } from '../firebase';
 import {
-	//createUserWithEmailAndPassword,
 	onAuthStateChanged,
-	//signInWithEmailAndPassword,
 	signOut
 } from 'firebase/auth';
 import { getNavItems } from "../constants/navigationData";
@@ -12,7 +10,6 @@ import UserBtns from "../components/UserBtns";
 
 function Navbar() {
 	const location = useLocation(); // get the current path name
-	
 	const [user, setUser] = useState(null);
 
 	useEffect(() => {
@@ -21,36 +18,6 @@ function Navbar() {
 			setUser(currentUser);
 		})
 	}, [])
-
-	/*async function handleSignUp() {
-		setError(null);
-		setMessage(null);
-
-		try {
-			const registeredUser = await createUserWithEmailAndPassword(auth, TEST_EMAIL, TEST_PASSWORD);
-			console.log('S-up successfull');
-			console.log(registeredUser);
-			setMessage('✅ Sign-up successful!');
-		} catch (error) {
-			console.log('S-up failed', error);
-			setError(error.message)
-		}
-	}*/
-
-	/*async function handleSignIn() {
-		setError(null);
-		setMessage(null);
-
-		try {
-			const loggedInUser = await signInWithEmailAndPassword(auth, TEST_EMAIL, TEST_PASSWORD);
-			console.log('S-in successfull');
-			console.log(loggedInUser);
-			setMessage('✅ Sign-in successful!');
-		} catch (error) {
-			console.log('S-in failed', error);
-			setError(error.message)
-		}
-	}*/
 
 	async function handleSignOut() {
 
