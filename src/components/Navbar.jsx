@@ -12,8 +12,7 @@ import UserBtns from "../components/UserBtns";
 
 function Navbar() {
 	const location = useLocation(); // get the current path name
-	const [message, setMessage] = useState(null);
-	const [error, setError] = useState(null);
+	
 	const [user, setUser] = useState(null);
 
 	useEffect(() => {
@@ -54,17 +53,14 @@ function Navbar() {
 	}*/
 
 	async function handleSignOut() {
-		setError(null);
-		setMessage(null);
 
 		try {
 			const signedOut = await signOut(auth);
 			console.log('S-out successfull');
 			console.log(signedOut);
-			//setMessage('✅ Sign-out successful!');
 		} catch (error) {
 			console.log('S-out failed', error);
-			setError(error.message);
+			console.log(error.message);			
 		}
 	}
 

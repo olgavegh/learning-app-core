@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-function UserBtns({ user, /*onSignUp, onSignIn,*/ onSignOut }) {
+function UserBtns({ user, onSignOut }) {
 
   return (
     <>
