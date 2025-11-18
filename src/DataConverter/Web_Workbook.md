@@ -262,25 +262,298 @@
 ## Firebase Realtime Database
 
 - What is Firebase Realtime Database? Explain the key features and advantages of the Realtime Database as a NoSQL database solution.
+
+  Firebase Realtime Database is a cloud-hosted NoSQL database that stores data as a JSON tree and syncs changes in real time to all connected clients.
+
+  **Key Features:**
+
+  - Real-time updates: Data changes are instantly synced to every user
+  - JSON-based NoSQL storage: Flexible, schema-less structure
+  - Offline support: Data is cached and syncs when back online
+  - Client-side SDKs: Works directly from web/mobile apps without a backend
+  - Security rules: Fine-grained read/write access control
+
+  **Advantages:**
+
+  - Perfect for chat apps, live dashboards, and collaborative tools
+  - Easy to set up, no servers required
+  - Auto-scaling and low maintenance
+
 - Explain the concept of storing data in a Realtime Database. How does a Realtime Database store data in a JSON tree?
+
+  The Firebase Realtime Database stores all data as one large JSON tree, not as tables. This means your database is basically a nested JSON object, where each "node" can contain child nodes.
+
+  **How it works:**
+
+  - Data is organized in key–value pairs, similar to a JavaScript object
+  - You structure data using paths, like `/users/123/name`
+  - Each path points to a node in the JSON tree
+  - Nodes can contain objects, arrays, or primitive values
+
 - How can you access the Realtime Database with a REST API? What do the typical CRUD operations look like?
+
+  You can access the Firebase Realtime Database through simple HTTP requests, because the database exposes a REST API. Every request targets a URL ending with `.json`.
+
+  **CRUD Operations:**
+
+  - **Create** - `POST /users.json` - Create with auto-ID
+  - **Read** - `GET /users.json` - Read data
+  - **Update** - `PATCH /users/123.json` - Partial update
+  - **Replace** - `PUT /users/123.json` - Full overwrite
+  - **Delete** - `DELETE /users/123.json` - Delete item
+
 - How the Realtime Database Security Rules can help to define the structure of the stored data (validation) when the data can be read from or written to?
+
+  Firebase Realtime Database Security Rules help with two things:
+
+  **1. Controlling When Data Can Be Read or Written**
+
+  You can specify who is allowed to access certain paths.
+
+  ```json
+  {
+    "rules": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    }
+  }
+  ```
+
+  **2. Defining the Structure of Stored Data (Validation)**
+
+  Even though Firebase is schemaless, Security Rules can enforce:
+
+  - Required fields
+  - Data types
+  - Minimum/maximum values
+  - Allowed patterns
+
+  **Example:** enforce a user object with a string `name` and a number `age` ≥ 0
+
+  ```json
+  {
+    "rules": {
+      "users": {
+        "$uid": {
+          ".write": "$uid === auth.uid",
+          "name": { ".validate": "newData.isString()" },
+          "age": { ".validate": "newData.isNumber() && newData.val() >= 0" }
+        }
+      }
+    }
+  }
+  ```
+
 - Why is it a problem if the data is deeply nested? What techniques can solve this issue?
+
+  **Problem with Deeply Nested Data:**
+
+  Why it's a problem:
+
+  - Hard to query specific data
+  - Difficult to update safely
+  - Complex security rules
+  - Performance issues (large downloads, slow sync)
+
+  **Techniques to Solve:**
+
+  - **Flatten the data structure** - Store entities in separate top-level nodes:
+
+    ```json
+    {
+      "users": { "123": { "name": "Anna" } },
+      "messages": { "room1": { "msg1": { "text": "Hi", "userId": "123" } } }
+    }
+    ```
+
+  - **Use References / Keys Instead of Nesting** - Instead of deeply nesting objects, store **IDs or keys** to link related data. This keeps the structure flat and easier to query or update.
+
+    **Example:**
+
+    ```json
+    "userMessages": {
+      "123": {
+        "room1": ["msg1", "msg2"]
+      }
+    }
+    ```
+
+  - **Denormalize for performance** - Duplicate small data pieces to avoid deep traversal.
+
+  - **Structure rules around flat paths** - Simplifies `.read`, `.write`, and `.validate`.
 
 ## Firebase Authentication
 
 - Why authentication is needed for a web application?
+
+  Authentication is needed to verify who the user is, so the application can:
+
+  - Protect private data
+  - Secure user actions
+  - Personalize the user experience (show their data, preferences, history)
+  - Enforce permissions and roles (e.g., admin vs. regular user)
+  - Prevent unauthorized access and attacks (impersonation, data leaks, misuse)
+
+  In short: authentication ensures only the right user can access and modify the right data.
+
 - What are the key functionalities of an authentication system?
+
+  An authentication system verifies the identity of users and ensures their credentials are handled securely. It manages login, logout, and session or token creation so users can stay authenticated safely. It also connects with authorization to control what each user is allowed to access. Overall, it protects private data and prevents unauthorized access within the application.
+
 - How does the server know that the client is successfully authenticated?
+
+  After a successful login, the server gives the client a session ID or an authentication token (like a JWT). On every request, the client sends this token/session ID back (usually in a cookie or Authorization header). The server checks this value to confirm that the user is already authenticated and allowed to access protected resources.
+
 - What is the difference between Authentication and Authorization?
+
+  **Authentication** verifies who the user is, usually by checking credentials like passwords, tokens, or OAuth identities.
+
+  **Authorization** decides what that authenticated user is allowed to do, such as which actions or resources they have permission to access.
+
 - How can you initialize the Firebase Authentication SDK?
+
+  To initialize Firebase Authentication, you first call `initializeApp()` with your Firebase config, then import and call `getAuth()` to get the Auth instance.
+
+  ```javascript
+  import { initializeApp } from "firebase/app";
+  import { getAuth } from "firebase/auth";
+
+  const firebaseConfig = {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_AUTH_DOMAIN",
+    // ... other config
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  ```
+
 - How the Firebase Realtime Database Security Rules can enforce authorization?
+
+  Firebase Realtime Database Security Rules enforce authorization by checking the user's authentication state before allowing access.
+
+  **Example:** Only allow users to read/write their own data
+
+  ```json
+  {
+    "rules": {
+      "users": {
+        "$uid": {
+          ".read": "auth != null && auth.uid === $uid",
+          ".write": "auth != null && auth.uid === $uid"
+        }
+      }
+    }
+  }
+  ```
+
+  This checks if the user is authenticated (`auth != null`) and if their user ID matches the path (`auth.uid === $uid`).
+
 - What kind of different authentication providers are supported by Firebase? Can you give some examples?
+
+  Firebase Authentication supports multiple authentication providers, allowing users to sign in using different methods:
+
+  - **Email/Password** - Traditional signup with email and password
+
+  - **Social Providers** - Google, Facebook, Twitter, GitHub, Apple
+
+  - **Phone Authentication** - SMS-based verification
+
+  - **Anonymous Authentication** - Temporary accounts without credentials (useful for guest users)
+
+  - **Custom Authentication** - Using your own backend to generate custom tokens
 
 ## Web Applications
 
 - Explain the concept of React Router. How does it enable client-side routing in React.js applications and facilitate the creation of multi-page-like experiences?
+
+  React Router allows React apps to change the UI based on the URL without reloading the page, enabling true client-side routing. It maps URL paths to components, so navigating between “pages” simply swaps components on the screen. This creates a smooth, fast, multi-page-like user experience inside a single-page application.
+
+  ```javascript
+  import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+
+  function App() {
+    return (
+      <BrowserRouter>
+        <nav>
+          <Link to="/">Home</Link>
+          <Link to="/about">About</Link>
+        </nav>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+        </Routes>
+      </BrowserRouter>
+    );
+  }
+
+  function Home() {
+    return <h1>Home Page</h1>;
+  }
+
+  function About() {
+    return <h1>About Page</h1>;
+  }
+
+  export default App;
+  ```
+
 - Why is it needed to `build` a React application? What does this build step do?
+
+  You need to build a React application because the code you write (JSX, modern ES6+, modules) cannot run directly in the browser. The build step transforms your development code into optimized files that browsers understand.
+
+  What the build step does:
+
+  - Compiles JSX → plain JavaScript
+  - Transpiles modern ES6+ code → browser-compatible JS
+  - Bundles all files (components, CSS, images) into a few optimized files
+  - Minifies and compresses the code to make it smaller and faster
+  - Removes development-only code (warnings, dev tools)
+  - Optimizes performance (tree-shaking, code splitting)
+
+  Result:
+  A production-ready, fast, small set of files (index.html, main.js, main.css) that you can deploy to any server.
+
 - What is the difference between local development (using a dev server, like Vite) and production deployment?
+
+  Dev servers are for fast development and debugging, while production deployments serve the optimized final version of your app to real users.
+
+  **Key Differences:**
+
+  **Local Development (Vite dev server):**
+
+  - Used while coding
+  - Hot Module Reload (HMR)
+  - Unoptimized code
+  - Full error messages and dev tools
+  - Runs only on your machine
+
+  **Production Deployment:**
+
+  - Used by real users
+  - Fully built & optimized code
+  - Minified, fast, stable
+  - No dev tools or verbose errors
+  - Runs on a real server
+
 - How can you deploy a Firebase application?
+
+  - Install Firebase CLI - `npm install -g firebase-tools`
+  - Log in - `firebase login`
+  - Initialize - `firebase init`
+  - Build your app (e.g., React) - `npm run build`
+  - Deploy - `firebase deploy`
+  - Done — your app is live on Firebase Hosting.
+
 - What are React Contexts? Which use cases are they suitable for?
+
+  React Context is a feature that lets you share data across many components without passing props manually through every level (prop drilling). It provides a global-like state for parts of your app.
+
+  React Context is best for app-wide or shared state that many components need, such as:
+
+  - Authentication state (current user, login status)
+  - Theme settings (dark/light mode)
+  - Language / localization
+  - UI settings (sidebar open/closed, layout mode)
+  - Global configuration
+  - Small state management needs (not as complex as Redux)
