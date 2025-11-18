@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const AdminQuestionForm = ({ onSubmit }) => {
+const AdminQuestionForm = ({ onSave, questionToUpdate, onCancel}) => {
   const [level, setLevel] = useState("");
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
@@ -11,7 +11,8 @@ const AdminQuestionForm = ({ onSubmit }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit({
+    
+    return onSave({
       question,
       level,
       answer,
@@ -31,8 +32,8 @@ const AdminQuestionForm = ({ onSubmit }) => {
           className="form-control"
           id="question"
           name="question"
+          defaultValue={questionToUpdate? questionToUpdate.question : null}
           type="text"
-          value={question}
           required
           onChange={(e) => setQuestion(e.target.value)}
         />
@@ -46,7 +47,7 @@ const AdminQuestionForm = ({ onSubmit }) => {
           className="form-control"
           id="level"
           name="level"
-          value={level}
+          defaultValue={questionToUpdate? questionToUpdate.level : null}
           required
           onChange={(e) => setLevel(e.target.value)}>
           <option value="">--Please choose level--</option>
@@ -63,7 +64,7 @@ const AdminQuestionForm = ({ onSubmit }) => {
           className="form-control"
           id="category"
           name="category"
-          value={category}
+          defaultValue={questionToUpdate? questionToUpdate.category : null}
           required
           onChange={(e) => setCategory(e.target.value)}>
           <option value="">--Please choose category--</option>
@@ -82,7 +83,7 @@ const AdminQuestionForm = ({ onSubmit }) => {
           id="answer"
           name="answer"
           type="text"
-          value={answer}
+          defaultValue={questionToUpdate? questionToUpdate.answer : null}
           required
           onChange={(e) => setAnswer(e.target.value)}
         />
@@ -97,14 +98,17 @@ const AdminQuestionForm = ({ onSubmit }) => {
           id="codesnippet"
           name="codesnippet"
           type="text"
-          value={codesnippet}
+          defaultValue={questionToUpdate? questionToUpdate.codesnippet : null}
           required
           onChange={(e) => setCodesnippet(e.target.value)}
         />
       </div>
 
       <div>
-        <button type="submit">Add new question</button>
+        <button type="submit">{questionToUpdate ? "Update Question" : "Create Question"}</button>
+        <button type="button" onClick={onCancel}>
+          Cancel
+        </button>
       </div>
     </form>
   );

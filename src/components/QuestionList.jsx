@@ -1,4 +1,4 @@
-import updateQuestion from "../apis/updateQuestion.api";
+import bookmarkQuestion from "../apis/bookmarkQuestion.api";
 import QuestionCard from "./QuestionCard";
 import Accordion from "./Accordion";
 
@@ -6,7 +6,7 @@ function QuestionList({ questions, loading, error, errorMessage, setQuestions, u
 
   const updateBookmark = async (id, bookmark) => {
     try {
-      await updateQuestion(id, bookmark)
+      await bookmarkQuestion(id, bookmark)
 
       setQuestions((current) =>
         current.map((question) => {

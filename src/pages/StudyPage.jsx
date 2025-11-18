@@ -15,20 +15,6 @@ export default function StudyPage() {
 
     const numQuestion = filteredQuestions?.length
 
-    // const cathegories = [];
-
-    // if(questions){
-    //     for (const question of questions) {
-    //     if (!cathegories.includes(question.category)) {
-    //       cathegories.push(question.category)
-    //     }
-    //   }
-    //   console.log(cathegories)
-
-    // }
-
-
-
     return (
         <>
             <TitleContainer

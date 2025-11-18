@@ -3,11 +3,13 @@ import TitleContainer from "../components/TitleContainer.jsx";
 import FilterContainer from "../components/FilterContainer.jsx";
 import { useState } from "react"
 import AdminQuestionCard from "../components/AdminQuestionCard.jsx";
-import AdminQuestionForm from "../components/AdminQuestionForm.jsx";
+import { useNavigate } from "react-router";
 
 export default function AdminPage() {
-  const { questions, loading, error, errorMessage } = useAllQuestions();
+  const { questions, loading, error, errorMessage, setQuestions } = useAllQuestions();
   const [currentModule, setCurrentModule] = useState("all");
+
+  const navigate = useNavigate();
 
   const filteredQuestions = questions?.filter(q => {
     if (currentModule === "all") return true;
@@ -16,8 +18,11 @@ export default function AdminPage() {
 
   const numQuestion = filteredQuestions?.length
 
-  const handleSubmit = () => {
-
+  const deleteQuestion = (id) => {
+    alert("Question deleted!")
+    setQuestions((questions) =>
+      questions.filter((question) => question.id !== id)
+    );
   }
 
   return (
@@ -26,8 +31,7 @@ export default function AdminPage() {
         badgeText="Admin mode"
         descText={`Review all ${numQuestion} assessment questions at your own pace. Mark difficult questions for later review and track your progress.`}
       />
-
-      <AdminQuestionForm onSubmit={() => handleSubmit()} />
+      <button onClick={() => navigate("/creator")}>Create new Question (navigate to creator page)</button>
 
       <div className="mx-1 mx-md-5">
         <FilterContainer currentModule={currentModule} setCurrentModule={setCurrentModule} />
@@ -46,9 +50,9 @@ export default function AdminPage() {
                       codesnippet={qData.codesnippet}
                       level={qData.level}
                       category={qData.category}
+                      onDelete={deleteQuestion}
                     />)))
                 )}
-
         </div>
       </div>
     </>
