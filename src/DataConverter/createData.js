@@ -101,5 +101,7 @@ async function createData(question) {
   }
 }
 
-await createData(allQuestions)
+for (const question of allQuestions) {
+  await createData(question);
+}
 
