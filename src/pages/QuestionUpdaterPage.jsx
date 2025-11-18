@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { getOneQuestionById, updateQuestion } from "../src/apis";
+import { updateQuestion } from "../apis/updateQuestion";
+// import getOneQuestionById from "../apis/"
 import AdminQuestionForm from "../components/AdminQuestionForm";
 
 const QuestionUpdaterPage = () => {
@@ -9,12 +10,12 @@ const QuestionUpdaterPage = () => {
   const [question, setQuestion] = useState(null);
 
   useEffect(() => {
-    
+
     (async () => {
-      const data = await getOneQuestionById(id);
-      
-      setQuestion(data);
-      
+      // const data = await getOneQuestionById(id);
+
+      // setQuestion(data);
+
     })();
 
   }, [id]);

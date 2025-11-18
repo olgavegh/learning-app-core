@@ -1,78 +1,145 @@
 // ====================================
 // APP NAVIGATION & PAGES DATA
 // ====================================
-
+import Home from "../pages/Home"
 import StudyPage from "../pages/StudyPage";
 import MatchingPage from "../pages/MatchingPage";
 import TestPage from "../pages/TestPage";
 import BookmarkedPage from "../pages/BookmarkedPage";
 import AdminPage from "../pages/AdminPage"
+import QuestionCreatorPage from "../pages/QuestionCreatorPage";
+import QuestionUpdaterPage from "../pages/QuestionUpdaterPage";
 
 export const PAGES = {
-  DASHBOARD: "dashboard",
+  HOME: "home",
   STUDY: "study",
   MATCHING: "matching",
   TEST: "test",
   BOOKMARKS: "bookmarks",
   ADMIN: "admin",
+  QUESTION_CREATOR: "question-creator",
+  QUESTION_UPDATER: "question-updater",
 };
 
 export const FEATURE_ITEMS = [
   {
+    id: PAGES.HOME,
+    text: "Home",
+    path: "/",
+    order: 1,
+    component: <Home />,
+    header: {
+      isVisible: false,
+    },
+    card: {
+      isVisible: false,
+    },
+  },
+  {
     id: PAGES.STUDY,
     text: "Study Mode",
-    activity: false,
+    path: "/learn",
     order: 2,
-    backgroundColor: "rgb(253, 253, 150)",
-    description:
-      'Scrollable list or card deck of all questions + answers. Clean, readable layout for quick review. "Mark as learned" toggle per question.',
-    icon: "📚",
     component: <StudyPage />,
+    header: {
+      isVisible: true,
+      activity: false,
+    },
+    card: {
+      isVisible: true,
+      backgroundColor: "rgb(253, 253, 150)",
+      description: 'Scrollable list or card deck of all questions + answers. Clean, readable layout for quick review. "Mark as learned" toggle per question.',
+    },
   },
   {
     id: PAGES.MATCHING,
     text: "Matching Game",
-    activity: false,
+    path: "/play",
     order: 3,
-    backgroundColor: "rgb(253, 253, 256)",
-    description:
-      "Interactive matching game where you connect questions with their correct answers. Perfect for memory retention and quick recall practice.",
-    icon: "🎯",
     component: <MatchingPage />,
+    header: {
+      isVisible: true,
+      activity: false,
+    },
+    card: {
+      isVisible: true,
+      backgroundColor: "rgb(253, 253, 256)",
+      description: "Interactive matching game where you connect questions with their correct answers. Perfect for memory retention and quick recall practice.",
+    },
   },
   {
     id: PAGES.TEST,
     text: "Test Game",
-    activity: false,
+    path: "/quiz",
     order: 4,
-    backgroundColor: "rgb(218, 245, 256)",
-    description:
-      "You get a random question from the selected topic(s) and three answer options. Choose the good one!",
-    icon: "✅",
     component: <TestPage />,
+    header: {
+      isVisible: true,
+      activity: false,
+    },
+    card: {
+      isVisible: true,
+      backgroundColor: "rgb(218, 245, 256)",
+      description: "You get a random question from the selected topic(s) and three answer options. Choose the good one!",
+    },
   },
-
   {
     id: PAGES.BOOKMARKS,
     text: "Bookmarked",
-    activity: false,
+    path: "/saved",
     order: 6,
-    backgroundColor: "rgb(248, 214, 179)",
-    description:
-      "Save your favorite questions and challenging topics for later review. Organize your study materials and track questions you want to revisit before your assessment.",
-    icon: "🔖",
     component: <BookmarkedPage />,
+    header: {
+      isVisible: true,
+      activity: false,
+    },
+    card: {
+      isVisible: true,
+      backgroundColor: "rgb(248, 214, 179)",
+      description: "Save your favorite questions and challenging topics for later review. Organize your study materials and track questions you want to revisit before your assessment.",
+    },
   },
   {
     id: PAGES.ADMIN,
     text: "Admin",
-    activity: false,
+    path: "/admin",
     order: 7,
-    backgroundColor: "rgb(253, 253, 256)",
-    description:
-      "Admin site",
-    icon: "🔖",
     component: <AdminPage />,
+    header: {
+      isVisible: true,
+      activity: false,
+    },
+    card: {
+      isVisible: false,
+    },
+  },
+  {
+    id: PAGES.QUESTION_CREATOR,
+    text: "Create Questions",
+    path: "/create",
+    order: 8,
+    component: <QuestionCreatorPage />,
+    header: {
+      isVisible: false,
+      activity: false,
+    },
+    card: {
+      isVisible: false,
+    },
+  },
+  {
+    id: PAGES.QUESTION_UPDATER,
+    text: "Update Questions",
+    path: "/update",
+    order: 9,
+    component: <QuestionUpdaterPage />,
+    header: {
+      isVisible: false,
+      activity: false,
+    },
+    card: {
+      isVisible: false,
+    },
   },
 ];
 
@@ -104,31 +171,42 @@ export const STUDY_MODULES = [
 // HELPER FUNCTIONS
 // ====================================
 
-// for Header
-export function getNavItems(currentPage) {
-  return FEATURE_ITEMS.map((item) => ({
+// Get ALL items for routing - returns all feature items for router
+export function getAllRoutes() {
+  return FEATURE_ITEMS.map(item => ({
     id: item.id,
     text: item.text,
-    activity: item.id === currentPage,
+    path: item.path,
     component: item.component,
   }));
 }
 
-// for DashBoard Cards =>  Only items with descriptions !!!
-export function getDashboardCards() {
-  return FEATURE_ITEMS.filter((item) => item.description).map((item) => ({
+// Filter for header navigation - returns data for router Links
+export function getNavItems(currentPath) {
+  return FEATURE_ITEMS.filter(item => item.header.isVisible).map(item => ({
     id: item.id,
-    page: item.id,
-    backgroundColor: item.backgroundColor,
-    title: item.text,
-    description: item.description,
-    icon: item.icon,
+    text: item.text,
+    path: item.path,
+    activity: item.path === currentPath,
+    component: item.component,
   }));
 }
 
-// for Header
+// for Home Cards - returns data for feature cards
+export function getDashboardCards() {
+  return FEATURE_ITEMS.filter(item => item.card.isVisible).map(item => ({
+    id: item.id,
+    path: item.path,
+    backgroundColor: item.card.backgroundColor,
+    title: item.text,
+    description: item.card.description,
+    icon: item.card.icon
+  }));
+}
+
+// for Module types
 export function getModules(currentModule) {
-  return FEATURE_ITEMS.map((item) => ({
+  return STUDY_MODULES.map((item) => ({
     id: item.id,
     name: item.name,
     description: item.description,
