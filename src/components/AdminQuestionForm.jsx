@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const AdminQuestionForm = ({ onSave, questionToUpdate, onCancel}) => {
+const AdminQuestionForm = ({ onSave, questionToUpdate, onCancel, }) => {
   const [level, setLevel] = useState("");
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
@@ -8,18 +8,26 @@ const AdminQuestionForm = ({ onSave, questionToUpdate, onCancel}) => {
   const [category, setCategory] = useState("");
 
   const categories = ["Data Basics", "Algorithm Basics", "Function Basics", "Built-in Features", "File Basics", "View Basics", "Event Basics", "Design Basics", "JavaScript - Language Specialties", "Git", "Terminal", "Debugging", "Javascript Language Features", "Fetch", "Responsive Design", "Object Oriented Javascript", "Express", "REST and CRUD", "React", "Testing Basics", "Firebase Realtime Database", "Firebase Authentication", "Web Applications"]
-
   
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
+    if(questionToUpdate){
+      return onSave({
+        question: e.target.question.value,
+        level: e.target.level.value,
+        answer: e.target.answer.value,
+        codesnippet: e.target.codesnippet.value,
+        category: e.target.category.value
+      });
+    }
     return onSave({
-      question,
-      level,
-      answer,
-      codesnippet,
-      category
-    });
+        question,
+        level,
+        answer,
+        codesnippet,
+        category
+      });
   };
 
   return (
@@ -34,7 +42,7 @@ const AdminQuestionForm = ({ onSave, questionToUpdate, onCancel}) => {
           id="question"
           name="question"
           defaultValue={questionToUpdate? questionToUpdate.question : null}
-          type="text"
+          type="textarea"
           required
           onChange={(e) => setQuestion(e.target.value)}
         />
@@ -48,12 +56,11 @@ const AdminQuestionForm = ({ onSave, questionToUpdate, onCancel}) => {
           className="form-control"
           id="level"
           name="level"
-          defaultValue={questionToUpdate? questionToUpdate.level : null}
           required
           onChange={(e) => setLevel(e.target.value)}>
-          <option value="">--Please choose level--</option>
-          <option value={"progbasics"}>Progbasics</option>
-          <option value={"web"}>Web</option>
+          <option value={questionToUpdate? questionToUpdate.level : null}>{questionToUpdate? questionToUpdate.level : "--Please choose level--"}</option>
+          <option value={"Progbasics"}>Progbasics</option>
+          <option value={"Web"}>Web</option>
         </select>
       </div>
 
@@ -65,10 +72,9 @@ const AdminQuestionForm = ({ onSave, questionToUpdate, onCancel}) => {
           className="form-control"
           id="category"
           name="category"
-          defaultValue={questionToUpdate? questionToUpdate.category : null}
           required
           onChange={(e) => setCategory(e.target.value)}>
-          <option value="">--Please choose category--</option>
+            <option value={questionToUpdate? questionToUpdate.category : null}>{questionToUpdate? questionToUpdate.category : "--Please choose category--"}</option>
           {categories.map((category) => (
             <option key={category} value={category}>{category}</option>
           ))}

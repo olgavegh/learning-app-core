@@ -7,11 +7,12 @@ import useSingleQuestion from "../hooks/useSingleQuestion";
 const QuestionUpdaterPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { question } = useSingleQuestion();
+  const { question, setSingleQuestion } = useSingleQuestion(id);
 
 
   const handleUpdateQuestion = async (question) => {
     await updateQuestion(id, question);
+    setSingleQuestion(null)
     navigate("/admin");
   };
 
@@ -19,7 +20,10 @@ const QuestionUpdaterPage = () => {
     <AdminQuestionForm
       questionToUpdate={question}
       onSave={handleUpdateQuestion}
-      onCancel={() => navigate("/admin")}
+      onCancel={() => {
+        setSingleQuestion(null);
+        navigate("/admin")
+      }}
     />
   );
 };

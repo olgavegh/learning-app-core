@@ -80,8 +80,8 @@ const webMarkdown = fs.existsSync(webFile)
   ? fs.readFileSync(webFile, "utf-8")
   : "";
 
-const progBasicsQuestions = parseMarkdown(progBasicsMarkdown, "progbasics");
-const webQuestions = parseMarkdown(webMarkdown, "web");
+const progBasicsQuestions = parseMarkdown(progBasicsMarkdown, "Progbasics");
+const webQuestions = parseMarkdown(webMarkdown, "Web");
 
 const allQuestions = [...progBasicsQuestions, ...webQuestions];
 
