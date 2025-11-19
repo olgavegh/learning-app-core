@@ -12,7 +12,7 @@ export default function useSingleQuestion(id) {
       setSingleQuestion(data);
       setisLoading(false);
     }).catch(err => setError(err.message))
-  }, []);
+  }, [id]);
 
   return {
     question: singleQuestion,

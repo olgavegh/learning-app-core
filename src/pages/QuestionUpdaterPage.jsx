@@ -17,14 +17,16 @@ const QuestionUpdaterPage = () => {
   };
 
   return (
-    <AdminQuestionForm
-      questionToUpdate={question}
-      onSave={handleUpdateQuestion}
-      onCancel={() => {
-        setSingleQuestion(null);
-        navigate("/admin")
-      }}
-    />
+    <div className="mb-3">
+      <AdminQuestionForm
+        questionToUpdate={question}
+        onSave={handleUpdateQuestion}
+        onCancel={() => {
+          setSingleQuestion(null);
+          navigate("/admin")
+        }}
+      />
+    </div>
   );
 };
 
