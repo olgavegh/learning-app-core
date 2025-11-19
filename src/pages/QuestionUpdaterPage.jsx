@@ -17,7 +17,7 @@ const QuestionUpdaterPage = () => {
 
   return (
     <AdminQuestionForm
-      question={question}
+      questionToUpdate={question}
       onSave={handleUpdateQuestion}
       onCancel={() => navigate("/admin")}
     />

@@ -9,6 +9,7 @@ const AdminQuestionForm = ({ onSave, questionToUpdate, onCancel}) => {
 
   const categories = ["Data Basics", "Algorithm Basics", "Function Basics", "Built-in Features", "File Basics", "View Basics", "Event Basics", "Design Basics", "JavaScript - Language Specialties", "Git", "Terminal", "Debugging", "Javascript Language Features", "Fetch", "Responsive Design", "Object Oriented Javascript", "Express", "REST and CRUD", "React", "Testing Basics", "Firebase Realtime Database", "Firebase Authentication", "Web Applications"]
 
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     

@@ -134,7 +134,7 @@ export const FEATURE_ITEMS = [
   {
     id: PAGES.QUESTION_UPDATER,
     text: "Update Questions",
-    path: "/updater/",
+    path: "/updater/:id",
     order: 9,
     component: <QuestionUpdaterPage />,
     header: {
