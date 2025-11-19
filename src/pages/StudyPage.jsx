@@ -24,7 +24,7 @@ export default function StudyPage() {
             />
 
             <div className="mx-1 mx-md-5">
-                <FilterContainer currentModule={currentModule} setCurrentModule={setCurrentModule} />
+                <FilterContainer currentModule={currentModule} setCurrentModule={setCurrentModule} isSearchBar={true} />
                 <QuestionList useAccordion={true} questions={filteredQuestions} loading={loading} error={error} errorMessage={errorMessage} setQuestions={setQuestions}></QuestionList>
             </div>
         </>

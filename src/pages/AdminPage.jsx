@@ -34,7 +34,7 @@ export default function AdminPage() {
       <button onClick={() => navigate("/create")}>Create new Question (navigate to creator page)</button>
 
       <div className="mx-1 mx-md-5">
-        <FilterContainer currentModule={currentModule} setCurrentModule={setCurrentModule} />
+        <FilterContainer currentModule={currentModule} setCurrentModule={setCurrentModule} isSearchBar={true} />
         <div className="my-3">
 
           {
