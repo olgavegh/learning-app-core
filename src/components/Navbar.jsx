@@ -1,6 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import { getNavItems } from "../constants/navigationData";
 import UserBtns from "../components/UserBtns";
+import PrimaryButton from "../components/ui/PrimaryButton.jsx"
 import { useAuth } from "../context/AuthProvider";
 
 function Navbar() {
