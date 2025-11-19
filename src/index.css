@@ -68,6 +68,20 @@
   background-color: var(--bg-green) !important;
 }
 
+body {
+  font-family: "Epilogue", Helvetica, Arial, sans-serif;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: var(--bg-neutral);
+  background-image: url("./assets/pattern.png");
+  background-repeat: repeat;
+  background-attachment: fixed;
+  background-position: top left;
+}
+
 /* ====================================
   ...
 =====================================*/
@@ -91,15 +105,6 @@ a {
 
 .btn {
   border-radius: 0 !important;
-}
-
-body {
-  font-family: "Epilogue", Helvetica, Arial, sans-serif;
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  min-width: 320px;
-  min-height: 100vh;
 }
 
 /* ====================================
