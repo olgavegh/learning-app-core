@@ -1,17 +1,21 @@
 import { useEffect } from "react";
 import { useAuth } from "../context/AuthProvider";
 import AuthForm from "./AuthForm";
+import { useNavigate } from "react-router-dom";
 
 
 function SignIn() {
-  const { signInWithCreds, error, reset } = useAuth();
+  const { signIn, error, reset } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     reset()
   }, [reset]);
   
-  function handleSubmit({ email, password}) {
-    signInWithCreds(email, password);
+  async function handleSubmit({ email, password}) {
+    const success = await signIn(email, password);
+
+    if (success) navigate('/');
   }
  
   return (

@@ -1,36 +1,11 @@
 import { Link, useLocation } from "react-router-dom";
-import { auth } from '../firebase';
-import {
-	onAuthStateChanged,
-	signOut
-} from 'firebase/auth';
 import { getNavItems } from "../constants/navigationData";
-import { useState, useEffect } from 'react';
 import UserBtns from "../components/UserBtns";
-import PrimaryButton from "../components/ui/PrimaryButton.jsx"
+import { useAuth } from "../context/AuthProvider";
 
 function Navbar() {
 	const location = useLocation(); // get the current path name
-	const [user, setUser] = useState(null);
-
-	useEffect(() => {
-		onAuthStateChanged(auth, (currentUser) => {
-			console.log('The user\'s auth state changed:', currentUser);
-			setUser(currentUser);
-		})
-	}, [])
-
-	async function handleSignOut() {
-
-		try {
-			const signedOut = await signOut(auth);
-			console.log('S-out successfull');
-			console.log(signedOut);
-		} catch (error) {
-			console.log('S-out failed', error);
-			console.log(error.message);
-		}
-	}
+	const { user, signOut } = useAuth();
 
 	return (
 		<header>
@@ -46,7 +21,7 @@ function Navbar() {
 						<div className="d-flex align-items-center me-auto">
 							<UserBtns
 								user={user}
-								onSignOut={handleSignOut}
+								signOut={signOut}
 							/>
 						</div>
 						<ul className="navbar-nav ms-auto align-items-center">

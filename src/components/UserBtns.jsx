@@ -1,21 +1,21 @@
 import { Link } from "react-router-dom";
 
-function UserBtns({ user, onSignOut }) {
+function UserBtns({ user, signOut }) {
 
   return (
     <>
       {!user ? (
         <>
-          <button >
+          <button type="button">
             <Link to="/sign-up" className="nav-link" >Sign up</Link>
           </button>
 
-          <button >
+          <button type="button">
             <Link to="/sign-in" className="nav-link" >Sign in</Link>
           </button>
         </>
       ) : (
-        <button onClick={onSignOut}>
+        <button type="button" onClick={signOut}>
           <Link to="/" className="nav-link">Sign out</Link>
         </button>
       )}

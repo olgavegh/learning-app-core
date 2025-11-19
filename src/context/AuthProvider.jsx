@@ -14,38 +14,51 @@ function AuthProvider({ children }) {
   const [user, loading] = useIdToken(auth);
   const [error, setError] = useState(null);
 
-  const signUpWithCreds = useCallback((email, password) => {
-    setError(null);
-    return createUserWithEmailAndPassword(auth, email, password).catch(
-      (err) => {
-        if (err.code === AuthErrorCodes.EMAIL_EXISTS) {
-          setError("Email already exists");
-        } else if (err.code === AuthErrorCodes.INVALID_EMAIL) {
-          setError("Invalid email address");
-        } else if (err.code === AuthErrorCodes.INVALID_PASSWORD) {
-          setError("Invalid password");
-        } else {
-          setError("Authentication error");
-        }
-      }
-    );
-  }, []);
+  async function signUp(email, password) {
+    setError(null)
 
-  const signInWithCreds = useCallback((email, password) => {
+    try {
+      const registeredUser = await createUserWithEmailAndPassword(auth, email, password);
+      console.log('S-up successful');
+      console.log(registeredUser);
+      return true;
+    } catch (err) {
+      if (err.code === AuthErrorCodes.EMAIL_EXISTS) {
+        setError("Email already exists");
+      } else if (err.code === AuthErrorCodes.INVALID_EMAIL) {
+        setError("Invalid email address");
+      } else if (err.code === AuthErrorCodes.INVALID_PASSWORD) {
+        setError("Invalid password");
+      } else {
+        setError("Authentication error");
+      }
+      return false;
+    }
+  }
+
+  async function signIn(email, password) {
     setError(null);
-    return signInWithEmailAndPassword(auth, email, password).catch((err) => {
+
+    try {
+      const loggedInUser = await signInWithEmailAndPassword(auth, email, password);
+      console.log('S-in successful');
+      console.log(loggedInUser);
+      return true;
+    } catch (err) {
       if (err.code === AuthErrorCodes.INVALID_LOGIN_CREDENTIALS) {
         setError("Wrong Credentials");
       } else {
         setError("Authentication error");
       }
-    });
-  }, []);
+      return false;
+    }
+  }
 
   const signOut = useCallback(() => {
     setError(null);
+    console.log('S-out successful');
     return fbSignOut(auth);
-  }, []);
+  }, []); // Having react compiler we do not need to use the useCallback any more
 
   const reset = useCallback(() => {
     setError(null);
@@ -53,14 +66,14 @@ function AuthProvider({ children }) {
 
   return (
     <AuthContext.Provider
-    value={{
-      error,
-      user,
-      signUpWithCreds,
-      signInWithCreds,
-      signOut,
-      reset
-    }}
+      value={{
+        error,
+        user,
+        signUp,
+        signIn,
+        signOut,
+        reset
+      }}
     >
       {loading ? <div>Loading...</div> : children}
     </AuthContext.Provider>

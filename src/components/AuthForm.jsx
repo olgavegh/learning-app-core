@@ -63,7 +63,9 @@ function AuthForm({ onSubmit, isSignIn }) {
         )}
 
         <div className="mb-3">
-          <button className="btn btn-primary" type="submit">{isSignIn ? "Sign In" : "Sign Up"}</button>
+          <button className="btn btn-primary" type="submit">
+            {isSignIn ? "Sign In" : "Sign Up"}
+          </button>
         </div>
         {error && <div className="error-box">{error}</div>}
       </form >
