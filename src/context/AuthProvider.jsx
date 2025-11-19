@@ -21,6 +21,7 @@ function AuthProvider({ children }) {
       const registeredUser = await createUserWithEmailAndPassword(auth, email, password);
       console.log('S-up successful');
       console.log(registeredUser);
+      return true;
     } catch (err) {
       if (err.code === AuthErrorCodes.EMAIL_EXISTS) {
         setError("Email already exists");
@@ -31,6 +32,7 @@ function AuthProvider({ children }) {
       } else {
         setError("Authentication error");
       }
+      return false;
     }
   }
 
@@ -41,12 +43,14 @@ function AuthProvider({ children }) {
       const loggedInUser = await signInWithEmailAndPassword(auth, email, password);
       console.log('S-in successful');
       console.log(loggedInUser);
+      return true;
     } catch (err) {
       if (err.code === AuthErrorCodes.INVALID_LOGIN_CREDENTIALS) {
         setError("Wrong Credentials");
       } else {
         setError("Authentication error");
       }
+      return false;
     }
   }
 
