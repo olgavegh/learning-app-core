@@ -117,11 +117,6 @@
 
   map() creates a new array by applying a function to every element of the original array.
   It does not modify the original array.
-  | Function | What it does | Returns | Example use |
-  | ------------ | ------------------------------------ | ---------------------------------- | --------------------------- |
-  | **map()** | Transforms each element | A **new array** (same length) | Multiply all numbers by 2 |
-  | **filter()** | Keeps only elements that pass a test | A **new array** (possibly shorter) | Keep only even numbers |
-  | **reduce()** | Combines all elements into one value | A **single value** | Sum all numbers or find max |
 
   ```javascript
   const nums = [1, 2, 3, 4];
@@ -161,67 +156,732 @@
 ## Fetch
 
 - How does a query string parameter in a URL contribute to web application functionality? Explain how query string parameters are typically used to pass data between web pages or APIs.
+
+  Query string parameters are the part of a URL that start after the ? symbol.
+  They are written as key=value pairs and separated by &.
+
+  Example:
+  https://example.com/search?term=javascript&limit=10
+
+  Roles and usage:
+
+  They let us send small amounts of data to a server or another page.
+  They help with filtering, sorting, searching, pagination, authentication tokens, etc.
+
+  Web applications or APIs read these parameters and use them to shape the response.
+
+  Examples of use cases:
+
+  /products?category=phones → returns phones only
+
+  /users?page=2 → returns page 2 of users
+
+  /search?q=cats → search for "cats"
+
+  Client-side JavaScript can read them using:
+
+  ```javascript
+  const params = new URLSearchParams(window.location.search);
+  console.log(params.get("term")); 
+  ```
+
+
 - What is the purpose and functionality of the fetch function in JavaScript?
+
+  fetch() is a built-in JavaScript function used to send HTTP requests to servers or APIs.
+  It can be used for:
+
+  Getting data (GET)
+
+  Sending data (POST)
+
+  Updating data (PUT/PATCH)
+
+  Deleting data (DELETE)
+
+  It always returns a Promise, because network operations take time.
+
+  ```javascript
+  fetch("https://api.example.com/data");
+  ```
+
 - Explain the syntax of the fetch function and how it handles asynchronous operations. Compare and contrast the syntax of making HTTP requests using fetch with async/await versus the syntax using .then() and .catch(). What are the key differences and benefits of using the async/await syntax in terms of code structure and readability?
+
+  Basic syntax
+  ```javascript
+  fetch(url, {
+    method: "GET",
+    headers: {},
+    body: JSON.stringify(data)
+  });
+  ```
+
+  Asynchronous behavior
+
+  Because fetch returns a Promise, JavaScript doesn't stop and wait for the server.
+  Instead, it continues running, and when the response arrives, the Promise is resolved.
+
+  Using fetch with .then() and .catch()
+  ```javascript
+  fetch("https://api.example.com/users")
+    .then(response => response.json())
+    .then(data => {
+      console.log("Users:", data);
+    })
+    .catch(error => {
+      console.error("Error:", error);
+    });
+  ```
+  This works well, but long chains can become harder to read.
+
+  Using fetch with async/await (cleaner)
+  ```javascript
+  async function loadUsers() {
+    try {
+      const response = await fetch("https://api.example.com/users");
+      const data = await response.json();
+      console.log("Users:", data);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  }
+  loadUsers();
+  ```
+
+
+  Benefits of async/await
+
+  Code looks like synchronous code → much easier to understand
+
+  Less nesting and indentation
+
+  Easier error handling with try/catch
+
+  Cleaner when dealing with multiple asynchronous steps
+
 - What is asynchronicity in JavaScript? Name some typical use cases when asynchronicity is needed.
+
+  Asynchronicity means JavaScript can start a task and continue running other code without waiting for that task to finish.
+  JavaScript is single-threaded, so async operations prevent blocking.
+  Typical use cases:
+
+  Fetching data from APIs
+
+  Loading images or files
+
+  Interacting with databases
+
+  Timers (setTimeout, setInterval)
+
+  Waiting for user actions (clicks, scrolling)
+
+  Reason: These tasks take time, and blocking the UI would freeze the page.
+
 - How can you handle the response received from a fetch request?
+
+  After sending a fetch request, you usually need to process the response body.
+  .json() → API responses
+
+  ```javascript
+  async function getData() {
+    const response = await fetch("https://api.example.com/info");
+    const data = await response.json(); // convert JSON response
+    console.log(data);
+  }
+  ```
+
 - How does the fetch function handle errors and handle HTTP status codes? Provide an example of using fetch to handle different types of responses, including successful and error responses.
+
+  fetch() only throws an error on network-level errors (e.g., no internet).
+  It does NOT automatically throw an error for HTTP 404 or 500.
+
+  You must check:
+  response.ok     // true if status is 200-299
+  response.status // numeric HTTP code
+
+  ```javascript
+  async function loadUser() {
+    try {
+     const res = await fetch("https://api.example.com/user/123");
+
+     if (!res.ok) {
+       console.log("Server returned an error:", res.status);
+       return;
+     }
+
+      const data = await res.json();
+      console.log("Success:", data);
+   } catch (error) {
+     console.log("Network error:", error);
+   }
+  }
+  loadUser();
+  ```
+
+  This example distinguishes:
+  Successful response → OK and JSON parsed
+  HTTP error → 404, 500, etc.
+  Network error → server unreachable, bad URL, connection dropped
+
 - Explain the parts of a URL.
+
+  https://example.com:443/products/item?id=25#reviews
+
+  Parts:
+
+  Protocol → https
+  Defines how data is transferred.
+
+  Domain / Hostname → example.com
+  The server’s name.
+
+  Port (optional) → :443
+  Default ports: 80 (http), 443 (https).
+
+  Path → /products/item
+  Identifies a resource on the server.
+
+  Query string → ?id=25
+  Contains parameters in key=value format.
+
+  Fragment / Hash → #reviews
+  Points to a specific part of the page (not sent to server).
 
 ## Responsive Design
 
 - What does responsive design do? Why is it important?
+
+  Responsive design ensures that a website automatically adapts to different screen sizes and devices.
+  It adjusts layouts, text, images, and navigation so the page is easy to use on:
+
+  phones, tablets, laptops, large monitors
+
+  Why it’s important:
+
+  Users access websites on many devices
+
+  Google ranks mobile-friendly sites higher
+
+  Better user experience (readability, usability)
+
+  Prevents zooming, scrolling sideways, broken layouts
+
 - What is a mobile-first approach?
+
+  Mobile-first means you start designing and coding the website for small screens first (mobile), and then add more layout features, spacing, or columns for larger screens using media queries.
+
+  In practice:
+
+  Begin with simple, vertical layout
+
+  Then add rules like @media (min-width: 768px) to adjust for tablets and desktops
+
+  This ensures the site works well on mobile devices from the start.
+
 - How can you test the website's appearance on different screen sizes in the browser?
+
+  You can test responsive design using the browser’s developer tools.
+
+  Steps (Chrome/Edge/Firefox):
+
+  Right-click → Inspect
+
+  Click the “Toggle Device Toolbar” icon (phone/tablet icon)
+
+  Choose device presets (iPhone, Pixel, iPad, etc.)
+
+  Drag to resize the viewport
+
+  Test orientation (portrait/landscape)
+
+  This allows you to simulate many screen sizes without a real device.
+
 - Can you give some techniques that help to fulfill the responsive design criteria?
+
+  Common responsive techniques include:
+
+  Fluid layouts using percentages instead of fixed px values
+
+  CSS Flexbox and CSS Grid for flexible structures
+
+  Responsive images (max-width: 100%)
+
+  Media queries to change layout at breakpoints
+
+  Mobile-friendly navigation, hamburger menus
+
+  Using rem/em units instead of fixed pixel values
+
+  Avoiding fixed widths, using max-width
+
+  Using viewport meta tag in HTML
+
+  ```javascript
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  ```
+
 - What do media queries do? How do they work?
+
+  Media queries let you apply CSS only when certain conditions are true, usually based on screen width.
+  They allow you to change layout or style at breakpoints (mobile, tablet, desktop).
+  The browser checks if the condition (e.g., screen width) is true.
+  If it is, the CSS inside the media query is applied.
+
+  ```css
+  /* Mobile styles (default) */
+  .container {
+    font-size: 16px;
+  }
+
+  /* Styles for screens 768px and up (tablets, desktops) */
+  @media (min-width: 768px) {
+    .container {
+      font-size: 20px;
+    }
+  }
+  ```
+
 - How would you define the Flexbox layout?
+
+  Flexbox is a CSS layout method designed for alignment, spacing, and distribution of elements in one dimension (horizontal OR vertical).
+  It makes it easy to: center items, create equal-sized columns, control spacing between elements, make responsive layouts without floats or complicated hacks
+
+  ```css
+  .container {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+  }
+  ```
+  Flexbox works with two main parts: the flex container, the flex items inside it.
+
 - How can you debug the Flexbox layout in the browser?
+
+  Most browsers have built-in Flexbox debugging tools.
+  Steps:
+
+  Open Developer Tools
+  Inspect the element with display: flex
+  Chrome/Edge/Firefox show: Flexbox icon, Flex lines, Gaps and alignment guides, The direction of the axis
+
+  You can also toggle Flexbox overlays that visually display spacing, alignment, and distribution.
+  Additionally, checking computed styles helps understand spacing and alignment issues.
+
 - What is the difference between the Flexbox container and the Flexbox item?
+
+  Flexbox container:
+
+  The element with display: flex
+  Controls layout rules (direction, alignment, wrapping)
+  Defines the main axis and cross axis
+  Its properties include: flex-direction, justify-content, align-items, flex-wrap
+
+  Flexbox item:
+
+  The child elements inside the flex container
+  Each item can control how it grows or shrinks
+
+  Its properties include: flex-grow, flex-shrink, flex-basis, order, align-self
+
+  In short: The container controls the whole layout, while the items control how each element behaves in that layout.
 
 ## Object Oriented Javascript
 
 - What is the difference between the class syntax and the constructor function syntax?
+
+  In JavaScript, both classes and constructor functions allow you to create objects with shared properties and methods. The difference is mostly in syntax and readability. Constructor functions are older: you define a function and attach methods to its prototype. Classes are newer, cleaner, and let you define a constructor and methods directly inside the class body. Internally, classes still use prototypes, but the syntax hides that complexity, making code easier to read and maintain.
+
+  Example — Constructor function:
+  ```javascript
+  function Person(name) {
+    this.name = name;
+  }
+  Person.prototype.sayHi = function() {
+    console.log("Hi, I'm " + this.name);
+  };
+  ```
+
+  Example — Class syntax:
+  ```javascript
+  class Person {
+    constructor(name) {
+     this.name = name;
+   }
+   sayHi() {
+     console.log("Hi, I'm " + this.name);
+   }
+  }
+  ```
+
 - What does the `new` keyword do?
+
+  The new keyword is used to create a new instance of a class or constructor function. It does a few things automatically: it creates a new empty object, sets this to point to that object, links the object to the constructor’s prototype, executes the constructor function or class constructor, and then returns the new object. Without new, the constructor would not produce a proper instance.
+
+  ```javascript
+  const user = new Person("Alice");
+  ```
+
 - What does a `constructor` method do in class syntax? When it is executed?
+
+  The constructor is a special method inside a class that runs automatically when a new instance is created. Its purpose is to initialize the object’s properties or state. You do not call it manually; it executes every time you use new on the class.
+
+  ```javascript
+  class Person {
+    constructor(name) {
+     this.name = name; // executed automatically
+   }
+  }
+  ```
+
 - What are the class methods of a class syntax?
+
+  Class methods are functions defined inside a class (outside the constructor) that describe the behavior of the objects. They are stored on the class prototype, so all instances share the same methods. You can call them on any instance of the class.
+
+  ```javascript
+  class Person {
+    constructor(name) {
+      this.name = name;
+    }
+   sayHi() {
+     console.log("Hi, I'm " + this.name);
+   }
+  }
+  const user = new Person("Bob");
+  user.sayHi(); // "Hi, I'm Bob"
+  ```
+
 - What are the fields of a class syntax?
+
+  Fields are properties that each instance of a class can have. They store data specific to the instance. Fields can be defined inside the constructor using this or directly in the class body using the modern field syntax.
+
+  ```javascript
+  class Person {
+    age = 30; // field defined in the class body
+   constructor(name) {
+     this.name = name; // field defined in constructor
+   }
+  }
+  ```
+
 - What is inheritance in the context of Javascript objects?
+
+  Inheritance allows one class or object to reuse properties and methods from another. When a class inherits from another, the child class automatically has access to the parent’s methods and fields, and can also add new behavior or override existing behavior. Internally, this works via the prototype chain: if a property or method isn’t found on the child, JavaScript looks at the parent.
+
 - What does the `extends` keyword do?
+
+  The extends keyword is used in class syntax to create a child class that inherits from a parent class. The child class gets access to all methods and properties of the parent class and can also add or override methods. This allows code reuse and creates a parent–child relationship between classes.
+
+  ```javascript
+  class Animal {
+   speak() {
+     console.log("Some sound");
+   }
+  }
+  class Dog extends Animal {
+   bark() {
+     console.log("Woof!");
+   }
+  }
+  const myDog = new Dog();
+  myDog.speak(); // inherited from Animal
+  myDog.bark();  // defined in Dog
+  ```
 
 ## Express
 
 - Explain the concept of client-server communication in the context of web development. How does information flow between the client and the server in a typical client-server architecture?
+
+  In web development, client-server communication is the process where the client (usually a browser) requests information and the server responds. The client sends an HTTP request, the server processes it, and sends back an HTTP response. This back-and-forth is the core of most web applications.
+
+  Flow example:
+
+  Browser requests GET /home.
+  Server checks the route, fetches data if needed.
+  Server sends HTML, JSON, or other data back to the browser.
+  Browser renders the response.
+
 - What is the role of HTTP requests and responses in web development? Explain the structure of an HTTP request and an HTTP response.
+
+  HTTP requests and responses are the messages exchanged between client and server.
+
+  HTTP Request structure:
+
+  Method: GET, POST, PUT, DELETE
+  URL: /api/users
+  Headers: metadata like Content-Type
+  Body: data sent to server (for POST/PUT)
+
+  HTTP Response structure:
+  
+  Status code: 200, 404, 500, etc.
+  Headers: metadata like Content-Type
+  Body: the data sent back (HTML, JSON, images…)
+
 - What is Express.js and how does it simplify web application development in Node.js? Explain the core features and benefits of using Express.js as a web framework.
+
+  Express.js is a minimal, flexible Node.js framework for building web applications and APIs. It simplifies handling HTTP requests, routing, middleware, and more.
+
+  Core features: Easy routing for different HTTP methods and paths. Middleware support for processing requests. Serving static files. Parsing request bodies.
+
+  Benefits: Less boilerplate compared to plain Node.js. Extensible with third-party libraries. Widely used and well-documented.
+
 - What are middlewares in Express.js? Can you list some examples of the built-in middleware?
+
+  Middlewares are functions that run during the request-response cycle. They can: Modify request/response objects, Execute code, End the request-response cycle, Call the next middleware
+
+  Built-in examples:
+  express.json() – parse JSON request bodies
+  express.static() – serve static files
+
 - How can you tell Express.js to use a middleware?
+
+  You can register middleware using app.use()
+
+  ```javascript
+  import express from 'express';
+  const app = express();
+
+  app.use(express.json()); // built-in JSON parser
+  ```
+
 - Explain the process of handling static files (e.g., CSS, images) in Express.js. How can you configure Express.js to serve static assets from a specific directory in your application?
+
+  Express can serve static files (CSS, images, JS) using express.static(). For example: Then, a file public/style.css is available at http://localhost:3000/style.css.
+
+  ```javascript
+  app.use(express.static('public')); // serves files from /public folder
+  ```
+
 - What does the built-in JSON middleware (`express.json()`) do?
+
+  express.json() automatically parses incoming JSON request bodies and attaches the data to req.body. Without it, req.body would be undefined for JSON payloads.
+
+  ```javascript
+  app.use(express.json());
+
+  app.post('/user', (req, res) => {
+    console.log(req.body); // parsed JSON
+    res.send('User received');
+  });
+  ```
+
 - How does Express.js handle HTTP request/response cycles? Explain the process of receiving and responding to requests using Express.js middlewares and route handlers.
+
+  When a request comes in:
+  Express matches the request to registered routes/middlewares.
+  Middlewares run in the order they are declared.
+  Route handler sends a response with res.send(), res.json(), etc.
+  If no middleware ends the cycle, the request passes to the next middleware via next().
+
 - How does routing work in Express.js? Explain how to define routes and handle different HTTP methods (GET, POST, etc.) in an Express.js application.
+
+  Routing maps URLs and HTTP methods to functions.
+
+  ```javascript
+  app.get('/users', (req, res) => res.send('List of users'));
+  app.post('/users', (req, res) => res.send('Create a user'));
+  app.put('/users/:id', (req, res) => res.send('Update user'));
+  app.delete('/users/:id', (req, res) => res.send('Delete user'));
+  ```
+
 - What are the various methods available in Express.js for sending responses to clients? Explain the differences between res.send() and res.json() in Express.js.
+
+  res.send() – sends a response of any type (string, buffer, HTML).
+  res.json() – sends JSON data and sets Content-Type: application/json.
+
+  ```javascript
+  res.send('<h1>Hello</h1>'); // HTML
+  res.json({ message: 'Hello' }); // JSON 
+  ```
+
 - What is the purpose of the next() function in Express.js middleware? How can you use it to pass control to the next middleware function in the chain or to terminate the middleware processing?
+
+  next() passes control to the next middleware in the chain. If you don’t call it, the request may hang unless the middleware ends the response.
+
+  ```javascript
+  app.use((req, res, next) => {
+    console.log('Middleware 1');
+   next(); // move to next middleware
+  });
+  app.use((req, res) => res.send('Hello from middleware 2'));
+  ```
+
 - Explain the concept of route parameters in Express.js. How can you extract dynamic values from the URL path using route parameters, and how are these values accessed within route handlers?
+
+  Route parameters are dynamic parts of the URL. Use : to define them and access via req.params.
+
+  ```javascript
+  app.get('/users/:id', (req, res) => {
+    const userId = req.params.id;
+    res.send(`User ID is ${userId}`);
+  });
+  ```
 
 ## REST and CRUD
 
 - Can you name some typical HTTP response codes and their meaning?
+
+  200 OK – The request was successful.
+
+  201 Created – A resource was successfully created (commonly used after POST).
+
+  204 No Content – The request was successful but there’s no response body.
+
+  400 Bad Request – The request is invalid (e.g., missing parameters).
+
+  401 Unauthorized – Authentication is required or failed.
+
+  403 Forbidden – The client doesn’t have permission to access the resource.
+
+  404 Not Found – The requested resource doesn’t exist.
+
+  500 Internal Server Error – Something went wrong on the server side.
+
 - Can you name some typical HTTP request/response headers and their meaning?
+
+  Headers provide metadata about requests or responses. Examples:
+
+  Request headers:
+  Content-Type: tells the server the format of the body (application/json, application/x-www-form-urlencoded).
+  Authorization: contains credentials for authentication.
+  Accept: tells the server what formats the client can handle (application/json, text/html).
+
+  Response headers:
+  Content-Type: tells the client the format of the returned data.
+  Set-Cookie: sends cookies from server to client.
+  Cache-Control: controls how the client caches the response.
+
+  Headers are key for controlling behavior, security, and content negotiation.
+
 - What are the common HTTP methods used in web development, and what are their respective purposes?
+
+  GET – Retrieve data. Safe and idempotent (doesn’t modify the resource).
+
+  POST – Create a new resource. Sends data in the request body.
+
+  PUT – Replace an existing resource completely.
+
+  PATCH – Update part of a resource (partial update).
+
+  DELETE – Remove a resource.
+
+  These methods align with CRUD operations (Create, Read, Update, Delete).
+
 - How does the GET method differ from the POST method? Explain when it is appropriate to use each method. Which one uses the request body to receive data?
+
+  GET: Retrieves data. Sends data via URL query parameters (?name=value). Should be used when the request does not change server state. Example: /search?q=recipe
+
+  POST: Creates a new resource. Sends data in the request body. Should be used for submitting forms or sending sensitive data. Example: sending JSON to create a new user.
+
+  POST uses the request body, while GET does not.
+
 - Explain the use of the PATCH method in HTTP. How does it differ from the PUT method, and when should it be used to update a resource?
+
+  PUT replaces an entire resource. Missing fields are removed.
+  PATCH updates only specific fields of a resource.
+  Use PATCH for partial updates and PUT for full replacement.
+
 - How can the DELETE method be used to remove a resource from a server? Explain how the DELETE method works and any considerations for handling resource deletion.
+
+  The DELETE method removes a resource at a specified URL. Servers should handle deletion safely (check permissions, maybe soft-delete instead of permanent deletion).
+
 - What does the REST architecture mean? What are the REST Constraints?
+
+  REST (Representational State Transfer) is an architectural style for web APIs. REST constraints:
+
+  Stateless: each request contains all information.
+
+  Client-server separation: client and server are independent.
+
+  Uniform interface: consistent use of HTTP methods and URLs.
+
+  Cacheable: responses can be cached.
+
+  Layered system: servers can be composed in layers.
+
+  REST APIs map CRUD operations to HTTP methods.
+
 - What does a URL's path represent in a REST architecture? Show an example of the `recipe` resource's CRUD operations. Define the HTTP method and a corresponding path for each CRUD operation.
+
+  The URL path identifies a resource. For a recipe resource:
+
+  (CRUD Operation	HTTP Method	URL Path) Create POST	/recipes ; Read-all	GET	/recipes ; Read-one	GET	/recipes/:id ; Update	PATCH/PUT	/recipes/:id ; Delete	DELETE /recipes/:id
+
 - How do you handle form submissions using JavaScript? Explain the process of capturing form data and preventing the default form submission behavior.
+
+  Select the form element.
+  Listen for the submit event.
+  Use event.preventDefault() to stop the default page reload.
+  Collect form data from inputs.
+
+  ```javascript
+  const form = document.querySelector('#myForm');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const data = new FormData(form);
+    console.log(Object.fromEntries(data.entries()));
+  });
+  ```
+
 - Explain the required elements necessary to define a form in HTML.
+
+  A basic form includes: <form> element with action and method attributes; Input elements: <input>, <textarea>, <select>; A submit button <button type="submit">Submit</button>
+
 - What is the purpose of the required attribute in HTML form elements? How does it enforce mandatory input fields and prevent form submission without the required information?
+
+  The required attribute enforces mandatory input fields. If a field is empty, the browser prevents form submission and shows a warning.
+
+  ```html
+  <input type="email" name="email" required>
+  ```
+
 - Explain the different types of form input fields available in HTML. How do input types like text, number, email, checkbox, and radio buttons differ, and how are they used in forms?
+
+  text – single-line text; number – numeric input; email – email address, validated by browser; checkbox – allows multiple selections; radio – allows one selection per group.
+  Each type provides different validation and UI behavior.
+
 - Can you explain the purpose of the name attribute in the context of form submission?
+
+  The name attribute identifies input values when submitting forms. Without name, the input’s value is not sent to the server.
+
 - Can you explain how we can connect a label tag to a form element?
+
+  Use the "for" attribute on <label> matching the input’s id. Clicking the label focuses the input.
+
+  ```html
+  <label for="email">Email:</label>
+  <input type="email" id="email" name="email">
+  ```
+
 - How can you dynamically manipulate or modify form elements using JavaScript? Explain how to add or remove form fields dynamically based on user interaction or specific conditions.
+
+  You can add or remove fields based on user interaction.
+
+  ```javascript
+  const container = document.querySelector('#fields');
+  const addBtn = document.querySelector('#addBtn');
+
+  addBtn.addEventListener('click', () => {
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.name = 'extraField';
+    container.appendChild(input);
+  });
+  ```
+
 - How can you convert form data into a format that can be easily transmitted or processed by the server?
+
+  You can convert form data to JSON or URL-encoded format. Example using FormData and fetch. This sends the form in a server-friendly JSON format.
+
+  ```javascript
+  const data = Object.fromEntries(new FormData(form).entries());
+
+  fetch('/submit', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+   body: JSON.stringify(data)
+  });
+  ```
 
 ## React
 
@@ -251,13 +911,115 @@
 ## Testing Basics
 
 - What is a test case?
+
+  A test case is a single, specific check to see if a part of your code works correctly. It defines the input, the expected outcome, and sometimes the steps to reproduce the test. For example, testing a function that adds two numbers could be one test case: check that add(2, 3) returns 5.
+
 - What are the advantages of writing unit tests?
+
+  Unit tests have several advantages: they help catch bugs early, make code safer to refactor, document how functions should behave, and give confidence that changes don’t break existing features. They also encourage better code structure because code that is easy to test is usually modular and clear.
+
 - What is an assertion? Give some examples.
+
+  An assertion is a statement in a test that checks if a value meets a certain condition. If the assertion fails, the test fails. Assertions are the core of testing because they define the expected result.
+
+  Examples with Vitest:
+
+  import { expect } from 'vitest';
+  ```javascript
+  expect(2 + 2).toBe(4);        // exact match
+  expect([1, 2]).toEqual([1, 2]); // deep equality
+  expect('hello').toContain('ell'); // string contains
+  ```
+
 - What is the arrange/act/assert pattern?
+
+  The arrange/act/assert pattern is a simple way to structure tests:
+
+  Arrange – set up the data, objects, or state needed for the test.
+
+  Act – perform the action you want to test (call a function, click a button, etc.).
+
+  Assert – check that the outcome is what you expected using assertions.
+
+  ```javascript
+  import { expect, test } from 'vitest';
+
+  test('adds two numbers', () => {
+   // Arrange
+   const a = 2;
+   const b = 3;
+
+    // Act
+   const result = a + b;
+
+    // Assert
+   expect(result).toBe(5);
+  });
+  ```
+
 - What is code coverage? Why is it used?
+
+  Code coverage measures how much of your code is tested by unit tests. It tells you which lines, branches, or functions were executed during tests. High coverage doesn’t guarantee bug-free code, but it helps identify untested parts of your code and improves confidence in your tests.
+
 - How do you test asynchronous code with Vitest?
+
+  For asynchronous code (like fetch or setTimeout), you can return a Promise or use async/await in your test. Vitest waits for the Promise to resolve before checking assertions.
+
+  ```javascript
+  import { expect, test } from 'vitest';
+
+  async function fetchData() {
+   return "Hello";
+  }
+  test('fetchData returns Hello', async () => {
+    const result = await fetchData();
+    expect(result).toBe("Hello");
+  });
+  ```
+
 - What is `setup` & `teardown` in Vitest?
+
+  Setup is code that runs before a test or a group of tests, used to prepare the environment or initial data.
+
+  Teardown is code that runs after a test or group of tests to clean up, reset data, or release resources.
+
+  ```javascript
+  import { beforeEach, afterEach, test, expect } from 'vitest';
+
+  let counter = 0;
+
+  beforeEach(() => {
+    counter = 1; // setup
+  });
+
+  afterEach(() => {
+   counter = 0; // teardown
+  });
+
+  test('counter is 1 at start', () => {
+    expect(counter).toBe(1);
+  });
+  ```
+
 - Give an example when you would use in Vitest's the `toBe` & `toEqual` assertions.
+
+  toBe is used for primitive values (numbers, strings, booleans) and checks exact equality.
+
+  toEqual is used for objects or arrays to check deep equality.
+
+  ```javascript
+  import { expect, test } from 'vitest';
+
+  test('toBe example', () => {
+   expect(2 + 3).toBe(5);  // exact primitive match
+  });
+
+  test('toEqual example', () => {
+    expect([1, 2, 3]).toEqual([1, 2, 3]);  // deep equality for arrays
+    expect({a: 1}).toEqual({a: 1});        // deep equality for objects
+  });
+  ```
+
 
 ## Firebase Realtime Database
 

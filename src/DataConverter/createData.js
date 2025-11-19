@@ -80,8 +80,8 @@ const webMarkdown = fs.existsSync(webFile)
   ? fs.readFileSync(webFile, "utf-8")
   : "";
 
-const progBasicsQuestions = parseMarkdown(progBasicsMarkdown, "progbasics");
-const webQuestions = parseMarkdown(webMarkdown, "web");
+const progBasicsQuestions = parseMarkdown(progBasicsMarkdown, "Progbasics");
+const webQuestions = parseMarkdown(webMarkdown, "Web");
 
 const allQuestions = [...progBasicsQuestions, ...webQuestions];
 
@@ -101,5 +101,7 @@ async function createData(question) {
   }
 }
 
-await createData(allQuestions)
+for (const question of allQuestions) {
+  await createData(question);
+}
 

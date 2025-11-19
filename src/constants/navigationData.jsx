@@ -9,6 +9,8 @@ import BookmarkedPage from "../pages/BookmarkedPage";
 import AdminPage from "../pages/AdminPage"
 import QuestionCreatorPage from "../pages/QuestionCreatorPage";
 import QuestionUpdaterPage from "../pages/QuestionUpdaterPage";
+import SignUpForm from "../components/SignUpForm";
+import SignInForm from "../components/SignInForm";
 
 export const PAGES = {
   HOME: "home",
@@ -19,6 +21,8 @@ export const PAGES = {
   ADMIN: "admin",
   QUESTION_CREATOR: "question-creator",
   QUESTION_UPDATER: "question-updater",
+  SIGNUP: "sign-up",
+  SIGNIN: "sign-in",
 };
 
 export const FEATURE_ITEMS = [
@@ -130,9 +134,37 @@ export const FEATURE_ITEMS = [
   {
     id: PAGES.QUESTION_UPDATER,
     text: "Update Questions",
-    path: "/update",
+    path: "/updater/:id",
     order: 9,
     component: <QuestionUpdaterPage />,
+    header: {
+      isVisible: false,
+      activity: false,
+    },
+    card: {
+      isVisible: false,
+    },
+  },
+  {
+    id: PAGES.SIGNUP,
+    text: "Sign Up",
+    path: "/sign-up",
+    order: 10,
+    component: <SignUpForm />,
+    header: {
+      isVisible: false,
+      activity: false,
+    },
+    card: {
+      isVisible: false,
+    },
+  },
+  {
+    id: PAGES.SIGNIN,
+    text: "Sign In",
+    path: "/sign-in",
+    order: 11,
+    component: <SignInForm />,
     header: {
       isVisible: false,
       activity: false,
