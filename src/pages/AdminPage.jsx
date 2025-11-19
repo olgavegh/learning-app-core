@@ -1,22 +1,26 @@
-import useAllQuestions from "../hooks/useAllQuestions.jsx";
+import useFilteredQuestions from "../hooks/useFilteredQuestions.jsx";
 import TitleContainer from "../components/TitleContainer.jsx";
 import FilterContainer from "../components/FilterContainer.jsx";
 import { useState } from "react"
 import AdminQuestionCard from "../components/AdminQuestionCard.jsx";
+import InfoMessage from "../components/InfoMessage.jsx"
 import { useNavigate } from "react-router";
 
 export default function AdminPage() {
-  const { questions, loading, error, errorMessage, setQuestions } = useAllQuestions();
-  const [currentModule, setCurrentModule] = useState("all");
-
   const navigate = useNavigate();
 
-  const filteredQuestions = questions?.filter(q => {
-    if (currentModule === "all") return true;
-    return q.level === currentModule; // Assuming questions have a 'module' property
-  });
-
-  const numQuestion = filteredQuestions?.length
+  const {
+    questions: filteredQuestions,
+    loading,
+    error,
+    errorMessage,
+    setQuestions,
+    levelFilter,
+    setLevelFilter,
+    searchFilter,
+    setSearchFilter,
+    filteredCount
+  } = useFilteredQuestions();
 
   const deleteQuestion = (id) => {
     alert("Question deleted!")
@@ -29,30 +33,39 @@ export default function AdminPage() {
     <>
       <TitleContainer
         badgeText="Admin mode"
-        descText={`Review all ${numQuestion} assessment questions at your own pace. Mark difficult questions for later review and track your progress.`}
+        descText={`Review all ${filteredCount} assessment questions at your own pace. Mark difficult questions for later review and track your progress.`}
       />
       <button className="mb-3" onClick={() => navigate("/create")}>Create new Question</button>
 
       <div className="mx-1 mx-md-5">
-        <FilterContainer currentModule={currentModule} setCurrentModule={setCurrentModule} isSearchBar={true} />
+        <FilterContainer
+          currentModule={levelFilter}
+          setCurrentModule={setLevelFilter}
+          searchTerm={searchFilter}
+          setSearchTerm={setSearchFilter}
+          isSearchBar={true}
+        />
         <div className="my-3">
 
           {
             error ? <div>Error occured: {errorMessage}</div> :
               loading ? <div>Loading...</div> :
-                (
-                  filteredQuestions?.map((qData) => (
-                    (< AdminQuestionCard
-                      key={qData.id}
-                      question={qData.question}
-                      id={qData.id}
-                      answer={qData.answer}
-                      codesnippet={qData.codesnippet}
-                      level={qData.level}
-                      category={qData.category}
-                      onDelete={deleteQuestion}
-                    />)))
-                )}
+                filteredQuestions?.length === 0 ? (
+                  <InfoMessage />
+                ) :
+                  (
+                    filteredQuestions?.map((qData) => (
+                      (< AdminQuestionCard
+                        key={qData.id}
+                        question={qData.question}
+                        id={qData.id}
+                        answer={qData.answer}
+                        codesnippet={qData.codesnippet}
+                        level={qData.level}
+                        category={qData.category}
+                        onDelete={deleteQuestion}
+                      />)))
+                  )}
         </div>
       </div>
     </>
