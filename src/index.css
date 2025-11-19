@@ -103,7 +103,7 @@ a {
   text-decoration: inherit;
 }
 
-.btn {
+.btn:not(.rounded-circle) {
   border-radius: 0 !important;
 }
 
