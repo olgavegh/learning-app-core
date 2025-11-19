@@ -7,6 +7,7 @@ import {
 import { getNavItems } from "../constants/navigationData";
 import { useState, useEffect } from 'react';
 import UserBtns from "../components/UserBtns";
+import PrimaryButton from "../components/ui/PrimaryButton.jsx"
 
 function Navbar() {
 	const location = useLocation(); // get the current path name
@@ -27,7 +28,7 @@ function Navbar() {
 			console.log(signedOut);
 		} catch (error) {
 			console.log('S-out failed', error);
-			console.log(error.message);			
+			console.log(error.message);
 		}
 	}
 
@@ -55,9 +56,9 @@ function Navbar() {
 								</li>
 							))}
 							<li>
-								<button className="navbar-cta" type="button" aria-label="Call to Action">
+								<PrimaryButton type="button" onClick={""}>
 									Call Barna
-								</button>
+								</PrimaryButton>
 							</li>
 						</ul>
 					</div>

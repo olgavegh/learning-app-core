@@ -17,7 +17,7 @@ function FilterContainer({ currentModule, setCurrentModule, isSearchBar = false,
                                     key={card.id}
                                     backgroundColor={card.backgroundColor}
                                     title={card.title}
-                                    customClass={card.activity ? "active" : "inactive"}
+                                    customClass={"filter-card" + (currentModule === card.level ? " active" : " inactive")}
                                 />
                             </CardLink>
                         ))}
