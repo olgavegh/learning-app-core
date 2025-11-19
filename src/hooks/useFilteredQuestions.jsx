@@ -6,7 +6,7 @@ import useAllQuestions from "./useAllQuestions"
 export default function useFilteredQuestions() {
   const { questions, loading, error, errorMessage, setQuestions } = useAllQuestions();
 
-  const [levelFilter, setLevelFilter] = useState("all");
+  const [levelFilter, setLevelFilter] = useState("All");
   const [searchFilter, setSearchFilter] = useState("");
 
   let filteredQuestions = [];
@@ -14,8 +14,9 @@ export default function useFilteredQuestions() {
   if (questions) {
     // apply the filter first
     filteredQuestions = questions.filter(q => {
-      if (levelFilter === "all") return true;
-      return q.level === levelFilter;
+      if (levelFilter === "All") return true;
+      console.log(q.level)
+      return (q.level === levelFilter);
     })
 
     // then apply the search filter

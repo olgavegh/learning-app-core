@@ -20,6 +20,7 @@ export default function StudyPage() {
 
     return (
         <>
+
             <TitleContainer
                 badgeText="Study Mode"
                 titleText="Master every question with confidence"
@@ -34,6 +35,7 @@ export default function StudyPage() {
                     setSearchTerm={setSearchFilter}
                     isSearchBar={true}
                 />
+
                 <QuestionList
                     useAccordion={true}
                     questions={filteredQuestions}

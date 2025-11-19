@@ -178,21 +178,21 @@ export const FEATURE_ITEMS = [
 export const STUDY_MODULES = [
   {
     id: 1,
-    level: "all",
+    level: "All",
     backgroundColor: "rgb(253, 253, 150)",
     title: "All Module",
     activity: true,
   },
   {
     id: 2,
-    level: "progbasics",
+    level: "Progbasics",
     backgroundColor: "rgb(218, 245, 256)",
     title: "Prog Basic",
     activity: false,
   },
   {
     id: 3,
-    level: "web",
+    level: "Web",
     backgroundColor: "rgb(253, 253, 256)",
     title: "Web Module",
     activity: false,

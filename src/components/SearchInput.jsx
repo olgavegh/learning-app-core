@@ -6,6 +6,7 @@ export default function SearchInput({ searchTerm, setSearchTerm }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        setSearchTerm("")
     };
 
 
@@ -18,7 +19,7 @@ export default function SearchInput({ searchTerm, setSearchTerm }) {
                 value={searchTerm}
                 onChange={handleInputChange}
                 aria-label="Search" />
-            <button className="btn btn-outline-success" type="submit">Search</button>
+            <button className="btn btn-outline-success" type="submit">Reset</button>
         </form>
     )
 }

@@ -9,7 +9,6 @@ function FilterContainer({ currentModule, setCurrentModule, isSearchBar = false,
         <>
             <div className="d-flex flex-column gap-4 align-items-center justify-content-center">
                 <Badge textContent={"Choose a database"} />
-                <p>{currentModule}</p>
                 <div className="d-flex flex-column gap-3">
                     <div className="d-flex flex-column flex-sm-row gap-3">
                         {getModules(currentModule).map(card => (
