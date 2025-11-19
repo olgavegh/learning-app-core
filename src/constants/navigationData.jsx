@@ -9,8 +9,8 @@ import BookmarkedPage from "../pages/BookmarkedPage";
 import AdminPage from "../pages/AdminPage"
 import QuestionCreatorPage from "../pages/QuestionCreatorPage";
 import QuestionUpdaterPage from "../pages/QuestionUpdaterPage";
-import SignUpForm from "../components/SignUpForm";
-import SignInForm from "../components/SignInForm";
+import SignUp from "../components/SignUp";
+import SignIn from "../components/SignIn";
 
 export const PAGES = {
   HOME: "home",
@@ -150,7 +150,7 @@ export const FEATURE_ITEMS = [
     text: "Sign Up",
     path: "/sign-up",
     order: 10,
-    component: <SignUpForm />,
+    component: <SignUp />,
     header: {
       isVisible: false,
       activity: false,
@@ -164,7 +164,7 @@ export const FEATURE_ITEMS = [
     text: "Sign In",
     path: "/sign-in",
     order: 11,
-    component: <SignInForm />,
+    component: <SignIn />,
     header: {
       isVisible: false,
       activity: false,
