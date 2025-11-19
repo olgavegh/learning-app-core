@@ -3,14 +3,14 @@ import { useAuth } from "../context/AuthProvider";
 import { useEffect } from "react";
 
 function SignUp() {
-  const { signUpWithCreds, error, reset } = useAuth();
+  const { signUp, error, reset } = useAuth();
   
   useEffect(() => {
     reset();
   }, [reset]);
 
   function handleSubmit({ email, password }) {
-    signUpWithCreds(email, password);
+    signUp(email, password);
   }
 
   return (

@@ -4,14 +4,14 @@ import AuthForm from "./AuthForm";
 
 
 function SignIn() {
-  const { signInWithCreds, error, reset } = useAuth();
+  const { signIn, error, reset } = useAuth();
 
   useEffect(() => {
     reset()
   }, [reset]);
   
   function handleSubmit({ email, password}) {
-    signInWithCreds(email, password);
+    signIn(email, password);
   }
  
   return (
