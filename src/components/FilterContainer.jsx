@@ -3,12 +3,13 @@ import Badge from "./Badge"
 import { getModules } from "../constants/navigationData"
 import SearchInput from "../components/SearchInput"
 
-function FilterContainer({ currentModule, setCurrentModule, isSearchBar = false }) {
+function FilterContainer({ currentModule, setCurrentModule, isSearchBar = false, searchTerm, setSearchTerm }) {
 
     return (
         <>
             <div className="d-flex flex-column gap-4 align-items-center justify-content-center">
                 <Badge textContent={"Choose a database"} />
+                <p>{currentModule}</p>
                 <div className="d-flex flex-column gap-3">
                     <div className="d-flex flex-column flex-sm-row gap-3">
                         {getModules(currentModule).map(card => (
@@ -22,7 +23,7 @@ function FilterContainer({ currentModule, setCurrentModule, isSearchBar = false 
                             </CardLink>
                         ))}
                     </div>
-                    {isSearchBar && <SearchInput />}
+                    {isSearchBar && <SearchInput searchTerm={searchTerm} setSearchTerm={setSearchTerm} />}
                 </div>
 
             </div>

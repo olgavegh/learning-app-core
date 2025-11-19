@@ -1,36 +1,24 @@
 import React, { useState, useCallback, useEffect } from 'react'
 
-export default function SearchInput() {
+export default function SearchInput({ searchTerm, setSearchTerm }) {
 
-    // const [searchTerm, setSearchTerm] = useState('')
-    // const [searchResults, setSearchResults] = useState([])
+    const handleInputChange = (e) => setSearchTerm(e.target.value)
 
-    // const handleSearch = useCallback(
-    //     debounce((term) => {
-    //         if (term.trim() === '') {
-    //             setSearchResults([])
-    //         } else {
-    //             const results = sampleData.filter((item) =>
-    //                 item.title.toLowerCase().includes(term.toLowerCase()),
-    //             )
-    //             setSearchResults(results)
-    //         }
-    //     }, 300),
-    //     [],
-    // )
+    const handleSubmit = (e) => {
+        e.preventDefault();
+    };
 
-    // useEffect(() => {
-    //     handleSearch(searchTerm)
-    // }, [searchTerm, handleSearch])
-
-    // const handleInputChange = (e) => {
-    //     setSearchTerm(e.target.value)
-    // }
 
     return (
-        <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-            <button class="btn btn-outline-success" type="submit">Search</button>
+        <form className="d-flex" role="search" onSubmit={handleSubmit}>
+            <input
+                className="form-control me-2"
+                type="search"
+                placeholder="Search"
+                value={searchTerm}
+                onChange={handleInputChange}
+                aria-label="Search" />
+            <button className="btn btn-outline-success" type="submit">Search</button>
         </form>
     )
 }
