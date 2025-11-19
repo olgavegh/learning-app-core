@@ -25,8 +25,25 @@ function Navbar() {
 						</div>
 					)}
 
-					<button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-						<span className="navbar-toggler-icon"></span>
+					<button
+						className="navbar-toggler"
+						type="button"
+						data-bs-toggle="collapse"
+						data-bs-target="#navbarNav"
+						aria-controls="navbarNav"
+						aria-expanded="false"
+						aria-label="Toggle navigation"
+						onClick={(e) => {
+							const icon = e.currentTarget.querySelector('.animated-icon');
+							icon.classList.toggle('open');
+						}}
+					>
+						<div className="animated-icon">
+							<span></span>
+							<span></span>
+							<span></span>
+							<span></span>
+						</div>
 					</button>
 
 					<div className="collapse navbar-collapse" id="navbarNav">
@@ -42,7 +59,7 @@ function Navbar() {
 									Call Barna
 								</PrimaryButton>
 							</li>
-							<div className="d-flex align-items-center ms-3">
+							<div className="d-flex align-items-center m-3">
 								<UserBtns
 									user={user}
 									signOut={signOut}
