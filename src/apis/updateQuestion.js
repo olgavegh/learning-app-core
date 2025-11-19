@@ -10,6 +10,6 @@ export const updateQuestion = async (id, data) => {
   if (!response.ok) {
     throw new Error("Update operation failed");
   }
-
+  console.log("update done")
   return response;
 };

@@ -31,10 +31,10 @@ export default function AdminPage() {
         badgeText="Admin mode"
         descText={`Review all ${numQuestion} assessment questions at your own pace. Mark difficult questions for later review and track your progress.`}
       />
-      <button onClick={() => navigate("/create")}>Create new Question (navigate to creator page)</button>
+      <button className="mb-3" onClick={() => navigate("/create")}>Create new Question</button>
 
       <div className="mx-1 mx-md-5">
-        <FilterContainer currentModule={currentModule} setCurrentModule={setCurrentModule} />
+        <FilterContainer currentModule={currentModule} setCurrentModule={setCurrentModule} isSearchBar={true} />
         <div className="my-3">
 
           {

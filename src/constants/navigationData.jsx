@@ -134,7 +134,7 @@ export const FEATURE_ITEMS = [
   {
     id: PAGES.QUESTION_UPDATER,
     text: "Update Questions",
-    path: "/update",
+    path: "/updater/:id",
     order: 9,
     component: <QuestionUpdaterPage />,
     header: {
@@ -177,26 +177,26 @@ export const FEATURE_ITEMS = [
 
 export const STUDY_MODULES = [
   {
-    id: "all",
-    name: "All Modules",
-    description: "Show questions from all topics",
-    color: "rgb(253, 253, 150)",
+    id: 1,
+    level: "All",
+    backgroundColor: "rgb(253, 253, 150)",
+    title: "All Module",
     activity: true,
   },
   {
-    id: "progbasics",
-    name: "Programming Basics",
-    description: "Fundamental programming concepts",
-    color: "rgb(218, 245, 256)",
+    id: 2,
+    level: "Progbasics",
+    backgroundColor: "rgb(218, 245, 256)",
+    title: "Prog Basic",
     activity: false,
   },
   {
-    id: "web",
-    name: "Web Development",
-    description: "Frontend, backend, and web technologies",
-    color: "rgb(248, 214, 179)",
+    id: 3,
+    level: "Web",
+    backgroundColor: "rgb(253, 253, 256)",
+    title: "Web Module",
     activity: false,
-  },
+  }
 ];
 
 // ====================================
@@ -240,9 +240,9 @@ export function getDashboardCards() {
 export function getModules(currentModule) {
   return STUDY_MODULES.map((item) => ({
     id: item.id,
-    name: item.name,
-    description: item.description,
-    color: item.color,
+    level: item.level,
+    backgroundColor: item.backgroundColor,
+    title: item.title,
     activity: item.id === currentModule,
   }));
 }

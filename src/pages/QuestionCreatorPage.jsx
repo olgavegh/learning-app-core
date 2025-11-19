@@ -12,7 +12,9 @@ const QuestionCreatorPage = () => {
   };
 
   return (
-    <AdminQuestionForm onSave={handleSave} onCancel={() => navigate("/admin")}/>
+    <div className="mb-3">
+      <AdminQuestionForm onSave={handleSave} onCancel={() => navigate("/admin")}/>
+    </div>
   );
 };
 
