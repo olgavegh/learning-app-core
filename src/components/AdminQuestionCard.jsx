@@ -8,7 +8,7 @@ function AdminQuestionCard({ id, question, answer, codesnippet, level, category,
   const navigate = useNavigate()
 
   return (
-    <div className={id}>
+    <div className="mb-3">
       <h2>{question}</h2>
       <div>Level: {level}</div>
       <div>Category: {category}</div>
@@ -21,7 +21,7 @@ function AdminQuestionCard({ id, question, answer, codesnippet, level, category,
           </SyntaxHighlighter></div>
         }
       </div>
-      <button onClick={() => navigate(`/updater/${id}`)}>Update (navigate to update page)</button>
+      <button onClick={() => navigate(`/updater/${id}`)}>Update Question</button>
       <DeleteButton onDelete={onDelete} id={id}></DeleteButton>
     </div>
   )
