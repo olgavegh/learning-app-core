@@ -1,8 +1,8 @@
 import useAllQuestions from "../hooks/useAllQuestions.jsx";
 import TitleContainer from "../components/layout/TitleContainer.jsx";
-import FilterContainer from "../components/FilterContainer.jsx";
-import TestQCard from "../components/TestQCard.jsx";
-import TestAnswersCard from "../components/TestAnswersCard.jsx";
+import FilterContainer from "../components/ui/FilterContainer.jsx";
+import TestQCard from "../components/cards/TestQCard.jsx";
+import TestAnswersCard from "../components/cards/TestAnswersCard.jsx";
 import React, { useCallback, useEffect, useState } from 'react'
 
 function TestPage() {

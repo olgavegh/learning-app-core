@@ -1,9 +1,9 @@
 import useFilteredQuestions from "../hooks/useFilteredQuestions.jsx";
 import { HashLoader } from "react-spinners";
 import TitleContainer from "../components/layout/TitleContainer.jsx";
-import FilterContainer from "../components/FilterContainer.jsx";
+import FilterContainer from "../components/ui/FilterContainer.jsx";
 import AdminQuestionCard from "../components/cards/AdminQuestionCard.jsx";
-import InfoMessage from "../components/InfoMessage.jsx"
+import InfoMessage from "../components/ui/InfoMessage.jsx"
 import PrimaryButton from "../components/ui/PrimaryButton.jsx";
 import { useNavigate } from "react-router";
 

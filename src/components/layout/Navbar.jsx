@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { getNavItems } from "../../constants/navigationData.jsx";
-import UserBtns from "../UserBtns.jsx";
+import UserBtns from "../ui/UserBtns.jsx";
 import PrimaryButton from "../ui/PrimaryButton.jsx"
 import IconButton from "../ui/IconButton.jsx"
 import { useAuth } from "../../context/AuthProvider.jsx";

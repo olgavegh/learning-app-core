@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import IconButton from "../components/ui/IconButton.jsx"
-import signInIcon from "../assets/sign-in.svg"
-import signOutIcon from "../assets/sign-out.svg"
-import userCheckIcon from "../assets/user-circle-check.svg"
+import IconButton from "../ui/IconButton"
+import signInIcon from "../../assets/sign-in.svg"
+import signOutIcon from "../../assets/sign-out.svg"
+import userCheckIcon from "../../assets/user-circle-check.svg"
 
 function UserBtns({ user, signOut }) {
   return (

@@ -1,7 +1,7 @@
 import QuestionList from "../components/QuestionList.jsx";
 import useFilteredQuestions from "../hooks/useFilteredQuestions.jsx";
 import TitleContainer from "../components/layout/TitleContainer.jsx";
-import FilterContainer from "../components/FilterContainer.jsx";
+import FilterContainer from "../components/ui/FilterContainer.jsx";
 
 
 export default function StudyPage() {

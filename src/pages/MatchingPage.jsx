@@ -1,7 +1,7 @@
 import useAllQuestions from "../hooks/useAllQuestions.jsx";
 import { useEffect, useState } from "react";
-import MatchingCard from "../components/MatchingCard.jsx";
-import FilterContainer from "../components/FilterContainer.jsx";
+import MatchingCard from "../components/cards/MatchingCard.jsx";
+import FilterContainer from "../components/ui/FilterContainer.jsx";
 import TitleContainer from "../components/layout/TitleContainer.jsx";
 
 export default function MatchingPage() {

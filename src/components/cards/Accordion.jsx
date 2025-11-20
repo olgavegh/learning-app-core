@@ -1,4 +1,4 @@
-import icon from "../assets/accButton.svg"
+import icon from "../../assets/accButton.svg"
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
@@ -43,7 +43,7 @@ function Accordion({ id, parentId, question = "Default Question", answer = "defa
                 </label>
                 <div className="accordion-body">
                     <p>{answer}</p>
-                    <div>{codesnippet && 
+                    <div>{codesnippet &&
                         <div>
                             <SyntaxHighlighter language="javascript" style={docco}>
                                 {codesnippet.replace(/;/g, ';\n')}

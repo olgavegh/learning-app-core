@@ -1,7 +1,7 @@
 import bookmarkQuestion from "../apis/bookmarkQuestion.api";
-import QuestionCard from "./QuestionCard";
-import Accordion from "./Accordion";
-import InfoMessage from "./InfoMessage"
+import QuestionCard from "./cards/QuestionCard";
+import Accordion from "./cards/Accordion";
+import InfoMessage from "./ui/InfoMessage"
 
 function QuestionList({ questions, loading, error, errorMessage, setQuestions, useAccordion }) {
 

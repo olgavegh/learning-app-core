@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { updateQuestion } from "../apis/updateQuestion";
-import AdminQuestionForm from "../components/AdminQuestionForm";
+import AdminQuestionForm from "../components/forms/AdminQuestionForm";
 import useSingleQuestion from "../hooks/useSingleQuestion";
 
 
