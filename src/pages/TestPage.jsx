@@ -95,8 +95,8 @@ function TestPage() {
         }
         decideMatch()
     }, [randomQuestion, randomAnswerOptions, selectedAnswerId]);
-    console.log(randomQuestion);
-    console.log(randomAnswerOptions);
+    //console.log(randomQuestion);
+    //console.log(randomAnswerOptions);
     
     return (
         <>
