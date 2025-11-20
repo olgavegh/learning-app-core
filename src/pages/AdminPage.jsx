@@ -2,7 +2,7 @@ import useFilteredQuestions from "../hooks/useFilteredQuestions.jsx";
 import TitleContainer from "../components/TitleContainer.jsx";
 import FilterContainer from "../components/FilterContainer.jsx";
 import { useState } from "react"
-import AdminQuestionCard from "../components/AdminQuestionCard.jsx";
+import AdminQuestionCard from "../components/cards/AdminQuestionCard.jsx";
 import InfoMessage from "../components/InfoMessage.jsx"
 import { useNavigate } from "react-router";
 
