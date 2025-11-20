@@ -11,6 +11,7 @@ import QuestionCreatorPage from "../pages/QuestionCreatorPage";
 import QuestionUpdaterPage from "../pages/QuestionUpdaterPage";
 import SignUp from "../pages/SignUp";
 import SignIn from "../pages/SignIn";
+import Protected from "../components/routes/ProtectedRoute";
 
 export const PAGES = {
   HOME: "home",
@@ -92,7 +93,10 @@ export const FEATURE_ITEMS = [
     text: "Bookmarked",
     path: "/saved",
     order: 6,
-    component: <BookmarkedPage />,
+    component:
+      (<Protected >
+        <BookmarkedPage />
+      </Protected>),
     header: {
       isVisible: true,
       activity: false,
@@ -108,7 +112,10 @@ export const FEATURE_ITEMS = [
     text: "Admin",
     path: "/admin",
     order: 7,
-    component: <AdminPage />,
+    component:
+      (<Protected >
+        <AdminPage />
+      </Protected>),
     header: {
       isVisible: true,
       activity: false,
@@ -122,7 +129,11 @@ export const FEATURE_ITEMS = [
     text: "Create Questions",
     path: "/create",
     order: 8,
-    component: <QuestionCreatorPage />,
+    component:
+      (<Protected >
+        <QuestionCreatorPage />
+      </Protected>),
+
     header: {
       isVisible: false,
       activity: false,
@@ -136,7 +147,10 @@ export const FEATURE_ITEMS = [
     text: "Update Questions",
     path: "/updater/:id",
     order: 9,
-    component: <QuestionUpdaterPage />,
+    component:
+      (<Protected >
+        <QuestionUpdaterPage />
+      </Protected>),
     header: {
       isVisible: false,
       activity: false,
