@@ -1,7 +1,7 @@
 import { CardContainer, CardLink, FilterCard } from "./CardComponents"
 import Badge from "./ui/Badge"
 import { getModules } from "../constants/navigationData"
-import SearchInput from "../components/SearchInput"
+import SearchInput from "./ui/SearchInput"
 
 function FilterContainer({ currentModule, setCurrentModule, isSearchBar = false, searchTerm, setSearchTerm }) {
 

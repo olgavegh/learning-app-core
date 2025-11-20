@@ -1,10 +1,10 @@
 import { Link, useLocation } from "react-router-dom";
-import { getNavItems } from "../constants/navigationData";
-import UserBtns from "../components/UserBtns";
-import PrimaryButton from "../components/ui/PrimaryButton.jsx"
-import IconButton from "../components/ui/IconButton.jsx"
-import { useAuth } from "../context/AuthProvider";
-import userIcon from "../assets/user-circle-check.svg"
+import { getNavItems } from "../../constants/navigationData.jsx";
+import UserBtns from "../UserBtns.jsx";
+import PrimaryButton from "../ui/PrimaryButton.jsx"
+import IconButton from "../ui/IconButton.jsx"
+import { useAuth } from "../../context/AuthProvider.jsx";
+import userIcon from "../../assets/user-circle-check.svg"
 
 function Navbar() {
 	const location = useLocation(); // get the current path name
