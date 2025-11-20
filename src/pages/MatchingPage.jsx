@@ -2,7 +2,7 @@ import useAllQuestions from "../hooks/useAllQuestions.jsx";
 import { useEffect, useState } from "react";
 import MatchingCard from "../components/MatchingCard.jsx";
 import FilterContainer from "../components/FilterContainer.jsx";
-import TitleContainer from "../components/TitleContainer.jsx";
+import TitleContainer from "../components/layout/TitleContainer.jsx";
 
 export default function MatchingPage() {
   const { questions, loading, error, errorMessage } = useAllQuestions();

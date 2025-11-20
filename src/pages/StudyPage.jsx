@@ -1,6 +1,6 @@
 import QuestionList from "../components/QuestionList.jsx";
 import useFilteredQuestions from "../hooks/useFilteredQuestions.jsx";
-import TitleContainer from "../components/TitleContainer.jsx";
+import TitleContainer from "../components/layout/TitleContainer.jsx";
 import FilterContainer from "../components/FilterContainer.jsx";
 
 

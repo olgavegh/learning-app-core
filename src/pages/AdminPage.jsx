@@ -1,9 +1,10 @@
 import useFilteredQuestions from "../hooks/useFilteredQuestions.jsx";
-import TitleContainer from "../components/TitleContainer.jsx";
+import { HashLoader } from "react-spinners";
+import TitleContainer from "../components/layout/TitleContainer.jsx";
 import FilterContainer from "../components/FilterContainer.jsx";
-import { useState } from "react"
 import AdminQuestionCard from "../components/cards/AdminQuestionCard.jsx";
 import InfoMessage from "../components/InfoMessage.jsx"
+import PrimaryButton from "../components/ui/PrimaryButton.jsx";
 import { useNavigate } from "react-router";
 
 export default function AdminPage() {
@@ -33,9 +34,9 @@ export default function AdminPage() {
     <>
       <TitleContainer
         badgeText="Admin mode"
-        descText={`Review all ${filteredCount} assessment questions at your own pace. Mark difficult questions for later review and track your progress.`}
+        titleText="Admin DashBoard"
+        descText={`Manage and review all assessment questions in one place. Create, edit, or delete questions, filter by category or difficulty, and ensure your quiz content stays up to date and high quality.`}
       />
-      <button className="mb-3" onClick={() => navigate("/create")}>Create new Question</button>
 
       <div className="mx-1 mx-md-5">
         <FilterContainer
@@ -45,27 +46,36 @@ export default function AdminPage() {
           setSearchTerm={setSearchFilter}
           isSearchBar={true}
         />
-        <div className="my-3">
 
+        <div className="my-3">
+          <PrimaryButton onClick={() => navigate("/create")}>
+            Create new Question
+          </PrimaryButton >
           {
-            error ? <div>Error occured: {errorMessage}</div> :
-              loading ? <div>Loading...</div> :
-                filteredQuestions?.length === 0 ? (
-                  <InfoMessage />
-                ) :
-                  (
-                    filteredQuestions?.map((qData) => (
-                      (< AdminQuestionCard
-                        key={qData.id}
-                        question={qData.question}
-                        id={qData.id}
-                        answer={qData.answer}
-                        codesnippet={qData.codesnippet}
-                        level={qData.level}
-                        category={qData.category}
-                        onDelete={deleteQuestion}
-                      />)))
-                  )}
+            error ? (
+              <div>Error occured: {errorMessage}</div>
+            ) : loading ? (
+              <div className="d-flex flex-column align-items-center justify-content-center min-vh-50 py-5">
+                <HashLoader color="#17a2b8" size={80} />
+                <p className="mt-3 text-muted">Loading questions...</p>
+              </div>
+            ) : filteredQuestions?.length === 0 ? (
+              <InfoMessage />
+            ) : (
+              filteredQuestions?.map((qData) => (
+                <AdminQuestionCard
+                  key={qData.id}
+                  question={qData.question}
+                  id={qData.id}
+                  answer={qData.answer}
+                  codesnippet={qData.codesnippet}
+                  level={qData.level}
+                  category={qData.category}
+                  onDelete={deleteQuestion}
+                />
+              ))
+            )
+          }
         </div>
       </div>
     </>
