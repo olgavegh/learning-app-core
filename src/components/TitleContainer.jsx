@@ -1,4 +1,4 @@
-import Badge from "./Badge"
+import Badge from "./ui/Badge"
 function TitleContainer({ badgeText, titleText, descText }) {
     return (
         <div className="d-flex flex-column gap-3 align-items-center justify-content-center my-6">

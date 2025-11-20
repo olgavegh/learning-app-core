@@ -1,5 +1,5 @@
 import { CardContent, CardLink, CardContainer } from "../components/CardComponents"
-import Badge from "../components/Badge"
+import Badge from "../components/ui/Badge"
 import TitleContainer from '../components/TitleContainer';
 import { getDashboardCards } from "../constants/navigationData";
 import { Link } from "react-router-dom"

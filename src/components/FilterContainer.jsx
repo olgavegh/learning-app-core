@@ -1,5 +1,5 @@
 import { CardContainer, CardLink, FilterCard } from "./CardComponents"
-import Badge from "./Badge"
+import Badge from "./ui/Badge"
 import { getModules } from "../constants/navigationData"
 import SearchInput from "../components/SearchInput"
 
