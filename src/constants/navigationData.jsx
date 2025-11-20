@@ -9,8 +9,8 @@ import BookmarkedPage from "../pages/BookmarkedPage";
 import AdminPage from "../pages/AdminPage"
 import QuestionCreatorPage from "../pages/QuestionCreatorPage";
 import QuestionUpdaterPage from "../pages/QuestionUpdaterPage";
-import SignUp from "../components/SignUp";
-import SignIn from "../components/SignIn";
+import SignUp from "../pages/SignUp";
+import SignIn from "../pages/SignIn";
 
 export const PAGES = {
   HOME: "home",

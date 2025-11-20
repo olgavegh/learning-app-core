@@ -1,4 +1,4 @@
-import AuthForm from "./AuthForm";
+import AuthForm from "../components/AuthForm";
 import { useAuth } from "../context/AuthProvider";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
