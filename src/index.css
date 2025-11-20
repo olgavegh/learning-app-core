@@ -68,13 +68,15 @@
   background-color: var(--bg-green) !important;
 }
 
-body {
+#root {
   font-family: "Epilogue", Helvetica, Arial, sans-serif;
   margin: 0;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   min-width: 320px;
-  min-height: 100vh;
+  min-width: 100dvw;
+  min-height: 100dvh;
   background-color: var(--bg-neutral);
   background-image: url("./assets/pattern.png");
   background-repeat: repeat;
@@ -445,8 +447,44 @@ header {
   color: gold;
 }
 
+/* ====================================
+  Footer
+=====================================*/
+
 .footer {
-  background-color: #daf5f0;
+  background-color: var(--bg-green);
+  padding: 2rem 0;
+  border-top: 2px solid rgb(0, 0, 0);
+}
+
+.footer-brand {
+  font-family: "Lexend Mega", Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.1em;
+  color: var(--bg-dark);
+  margin-bottom: 0.5rem !important;
+}
+
+.footer-text {
+  font-family: "Epilogue", Helvetica, Arial, sans-serif;
+  font-size: 1rem;
+  color: var(--bg-dark);
+  font-weight: 500;
+}
+
+.footer-copyright {
+  font-family: "Epilogue", Helvetica, Arial, sans-serif;
+  font-size: 0.9rem;
+  color: var(--bg-dark);
+  font-weight: 600;
+}
+
+.footer-developers {
+  font-family: "Epilogue", Helvetica, Arial, sans-serif;
+  font-size: 0.8rem;
+  color: rgba(26, 29, 32, 0.7);
+  font-weight: 400;
 }
 
 /* ====================================
