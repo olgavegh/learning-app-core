@@ -20,20 +20,21 @@ function TestPage() {
     });
 
     const shuffleArray = (array) => {
-    const newArray = [...array];
-    for (let i = newArray.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
-    }
-    return newArray;
-  };
+        const newArray = [...array];
+        for (let i = newArray.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+        }
+        return newArray;
+    };
 
     const getRandomQuestion = useCallback(() => {
         if (!filteredQuestions) return;
 
         const randomQIndex = Math.floor(Math.random() * filteredQuestions.length);
         const randomQ = filteredQuestions[randomQIndex];
-        setRandomQuestion(randomQ);
+        //console.log(randomQ);
+        setRandomQuestion(randomQ);        
     }, [filteredQuestions]);
 
     const getRandomAnswers = useCallback(() => {
@@ -41,11 +42,14 @@ function TestPage() {
 
         const randomAnsws = [randomQuestion];
         //console.log(randomAnsws);
-
+        
         while (randomAnsws.length < 4) {
             const randomAIndex = Math.floor(Math.random() * questions.length);
             const randomA = questions[randomAIndex];
-            randomAnsws.push(randomA);
+            
+            if (!randomAnsws.includes(randomA)) {
+                randomAnsws.push(randomA);
+            }
         }
         setRandomAnswerOptions(shuffleArray(randomAnsws));
     }, [questions, randomQuestion]);
@@ -58,14 +62,7 @@ function TestPage() {
     }
 
     function handleAnswerSelect(event) {
-        //event.preventDefault();
-
-        //console.log('selected A: ', event.target.id);
-
-        /*if (!selectedAnswerId) {
-            setSelectedAnswerId(event.target.id);
-        }*/
-        //setSelectedAnswerId(event.target.id);
+        
         if (!isMatch) {
             setSelectedAnswerId(event.target.id);
         }
@@ -89,19 +86,18 @@ function TestPage() {
     useEffect(() => {
         if (!randomQuestion || !randomAnswerOptions || !selectedAnswerId) return;
 
-            function decideMatch() {
-                if (selectedAnswerId !== randomQuestion.id) {
-                    setIsMatch(false);
-                } else {
-                    setIsMatch(true);
-                }
+        function decideMatch() {
+            if (selectedAnswerId !== randomQuestion.id) {
+                setIsMatch(false);
+            } else {
+                setIsMatch(true);
             }
-            decideMatch()
+        }
+        decideMatch()
     }, [randomQuestion, randomAnswerOptions, selectedAnswerId]);
-    //console.log('selectedAnswer length: ', selectedAnswerId.length);
-    //console.log(`Q's id: `, randomQuestion.id);
-    //console.log('match: ', isMatch);
-
+    //console.log(randomQuestion);
+    //console.log(randomAnswerOptions);
+    
     return (
         <>
             <TitleContainer
@@ -122,14 +118,14 @@ function TestPage() {
                             loading ? <div>Loading...</div> :
                                 randomAnswerOptions.map((answer, index) => (
                                     <TestAnswersCard
-                                    key={index} 
-                                    id={answer.id}
-                                    answer={answer} 
-                                    isMatch={isMatch}
-                                    isSelected={answer.id === selectedAnswerId}
-                                    selectedId={selectedAnswerId}
-                                    randomQuestionId={randomQuestion.id}
-                                    onClick={handleAnswerSelect} />
+                                        key={index}
+                                        id={answer.id}
+                                        answer={answer}
+                                        isMatch={isMatch}
+                                        isSelected={answer.id === selectedAnswerId}
+                                        selectedId={selectedAnswerId}
+                                        randomQuestionId={randomQuestion.id}
+                                        onClick={handleAnswerSelect} />
                                 ))
                     }
                 </div>
