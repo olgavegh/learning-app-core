@@ -20,7 +20,7 @@ function DashBoard() {
                 <Badge textContent={"Choose a mode"} />
                 <CardContainer>
                     {getDashboardCards().map(card => (
-                        <CardLink key={card.id} to={`/${card.page}`}>
+                        <CardLink key={card.id} to={card.path}>
                             <CardContent
                                 key={card.id}
                                 backgroundColor={card.backgroundColor}
