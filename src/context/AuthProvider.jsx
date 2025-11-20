@@ -7,11 +7,15 @@ import {
   signInWithEmailAndPassword,
   AuthErrorCodes,
 } from "firebase/auth";
+import { HashLoader } from "react-spinners";
 
 const AuthContext = createContext(null);
 
 function AuthProvider({ children }) {
   const [user, loading] = useIdToken(auth);
+  // Debug logs to track loading and user state
+  console.log('[AuthProvider] user:', user);
+  console.log('[AuthProvider] loading:', loading);
   const [error, setError] = useState(null);
 
   async function signUp(email, password) {
@@ -75,7 +79,13 @@ function AuthProvider({ children }) {
         reset
       }}
     >
-      {loading ? <div>Loading...</div> : children}
+      {loading && (
+        <div className="d-flex flex-column align-items-center justify-content-center min-vh-100">
+          <HashLoader color="#17a2b8" size={80} margin={3} />
+          <p className="mt-3 text-muted">Checking authentication...</p>
+        </div>
+      )}
+      {!loading && children}
     </AuthContext.Provider>
   )
 }
