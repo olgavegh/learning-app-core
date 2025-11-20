@@ -7,7 +7,7 @@ export default function Layout(props) {
     return (
         <>
             <Navbar />
-            <main className="px-1" style={{ maxWidth: 1600, margin: '0 auto' }}>
+            <main >
                 <Outlet />
             </main>
             <Footer />
