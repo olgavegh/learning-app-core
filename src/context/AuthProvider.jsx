@@ -7,7 +7,7 @@ import {
   signInWithEmailAndPassword,
   AuthErrorCodes,
 } from "firebase/auth";
-import { HashLoader } from "react-spinners";
+import LoadingSpinner from "../components/ui/LoadingSpinner.jsx";
 
 const AuthContext = createContext(null);
 
@@ -80,10 +80,7 @@ function AuthProvider({ children }) {
       }}
     >
       {loading && (
-        <div className="d-flex flex-column align-items-center justify-content-center min-vh-100">
-          <HashLoader color="#17a2b8" size={80} margin={3} />
-          <p className="mt-3 text-muted">Checking authentication...</p>
-        </div>
+        <LoadingSpinner message="Checking authentication..." />
       )}
       {!loading && children}
     </AuthContext.Provider>

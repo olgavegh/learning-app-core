@@ -1,5 +1,5 @@
 import useFilteredQuestions from "../hooks/useFilteredQuestions.jsx";
-import { HashLoader } from "react-spinners";
+import LoadingSpinner from "../components/ui/LoadingSpinner.jsx";
 import TitleContainer from "../components/layout/TitleContainer.jsx";
 import FilterContainer from "../components/ui/FilterContainer.jsx";
 import AdminQuestionCard from "../components/cards/AdminQuestionCard.jsx";
@@ -55,10 +55,7 @@ export default function AdminPage() {
             error ? (
               <div>Error occured: {errorMessage}</div>
             ) : loading ? (
-              <div className="d-flex flex-column align-items-center justify-content-center min-vh-50 py-5">
-                <HashLoader color="#17a2b8" size={80} />
-                <p className="mt-3 text-muted">Loading questions...</p>
-              </div>
+              <LoadingSpinner message="Loading questions..." />
             ) : filteredQuestions?.length === 0 ? (
               <InfoMessage />
             ) : (

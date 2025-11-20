@@ -1,4 +1,5 @@
 import QuestionList from "../components/QuestionList.jsx";
+import LoadingSpinner from "../components/ui/LoadingSpinner.jsx";
 import useFilteredQuestions from "../hooks/useFilteredQuestions.jsx";
 import TitleContainer from "../components/layout/TitleContainer.jsx";
 import FilterContainer from "../components/ui/FilterContainer.jsx";
@@ -18,15 +19,15 @@ export default function StudyPage() {
         filteredCount
     } = useFilteredQuestions();
 
+    if (loading) return <LoadingSpinner message="Loading questions..."/>;
+
     return (
         <>
-
             <TitleContainer
                 badgeText="Study Mode"
                 titleText="Master every question with confidence"
                 descText={`Review all ${filteredCount} assessment questions at your own pace. Mark difficult questions for later review and track your progress.`}
             />
-
             <div className="mx-1 mx-md-5">
                 <FilterContainer
                     currentModule={levelFilter}
@@ -35,7 +36,6 @@ export default function StudyPage() {
                     setSearchTerm={setSearchFilter}
                     isSearchBar={true}
                 />
-
                 <QuestionList
                     useAccordion={true}
                     questions={filteredQuestions}
@@ -46,5 +46,5 @@ export default function StudyPage() {
                 />
             </div>
         </>
-    )
+    );
 }
