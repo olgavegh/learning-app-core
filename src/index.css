@@ -169,7 +169,7 @@ header {
   color: rgb(0, 0, 0);
 }
 
-@media (max-width: 900px) {
+@media (max-width: 992px) {
   .navbar-collapse {
     position: absolute !important;
     top: 100%;

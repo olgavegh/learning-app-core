@@ -10,6 +10,15 @@ function Navbar() {
 	const location = useLocation(); // get the current path name
 	const { user, signOut } = useAuth();
 
+	const openTogglerIcon = (e) => {
+		const icon = e.currentTarget.querySelector('.animated-icon');
+		icon.classList.toggle('open');
+	}
+	const resetTogglerIcon = () => {
+		const icon = document.querySelector('.animated-icon');
+		if (icon) icon.classList.remove('open');
+	};
+
 	return (
 		<header>
 			<nav className="navbar navbar-expand-lg sticky-top">
@@ -33,10 +42,7 @@ function Navbar() {
 						aria-controls="navbarNav"
 						aria-expanded="false"
 						aria-label="Toggle navigation"
-						onClick={(e) => {
-							const icon = e.currentTarget.querySelector('.animated-icon');
-							icon.classList.toggle('open');
-						}}
+						onClick={openTogglerIcon}
 					>
 						<div className="animated-icon">
 							<span></span>
@@ -50,12 +56,27 @@ function Navbar() {
 
 						<ul className="navbar-nav ms-auto align-items-center">
 							{getNavItems(location.pathname).map((page, index) => (
-								<li key={index} className="nav-item fw-semibold">
-									<Link to={page.path} className={`nav-link ${page.activity ? 'active' : ''}`}>{page.text}</Link>
+								<li
+									key={index}
+									className="nav-item fw-semibold"
+									// data-bs-toggle="collapse"
+									// data-bs-target="#navbarNav"
+									onClick={resetTogglerIcon}
+								>
+									<Link
+										to={page.path}
+										className={`nav-link ${page.activity ? 'active' : ''}`}
+									>
+										{page.text}
+									</Link>
 								</li>
 							))}
-							<li>
-								<PrimaryButton type="button" onClick={""}>
+							<li
+								// data-bs-toggle="collapse"
+								// data-bs-target="#navbarNav"
+								onClick={resetTogglerIcon}
+							>
+								<PrimaryButton type="button">
 									Call Barna
 								</PrimaryButton>
 							</li>
