@@ -9,11 +9,11 @@ function UserBtns({ user, signOut }) {
     <>
       {!user ? (
         <>
-          <IconButton type="button" aria-label="Sign up">
+          {/* <IconButton type="button" aria-label="Sign up">
             <Link to="/sign-up" className="nav-link" title="Sign up">
               <img src={userCheckIcon} alt="Sign up" width="20" height="20" />
             </Link>
-          </IconButton>
+          </IconButton> */}
 
           <IconButton type="button" aria-label="Sign in">
             <Link to="/sign-in" className="nav-link" title="Sign in">

@@ -9,8 +9,7 @@ import BookmarkedPage from "../pages/BookmarkedPage";
 import AdminPage from "../pages/AdminPage"
 import QuestionCreatorPage from "../pages/QuestionCreatorPage";
 import QuestionUpdaterPage from "../pages/QuestionUpdaterPage";
-import SignUp from "../pages/SignUp";
-import SignIn from "../pages/SignIn";
+import AuthPage from "../pages/AuthPage";
 import Protected from "../components/routes/ProtectedRoute";
 
 export const PAGES = {
@@ -164,7 +163,7 @@ export const FEATURE_ITEMS = [
     text: "Sign Up",
     path: "/sign-up",
     order: 10,
-    component: <SignUp />,
+    component: <AuthPage mode="sign-up" />,
     header: {
       isVisible: false,
       activity: false,
@@ -178,7 +177,7 @@ export const FEATURE_ITEMS = [
     text: "Sign In",
     path: "/sign-in",
     order: 11,
-    component: <SignIn />,
+    component: <AuthPage mode="sign-in" />,
     header: {
       isVisible: false,
       activity: false,

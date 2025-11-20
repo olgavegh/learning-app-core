@@ -19,6 +19,7 @@
   --bg-info: rgb(207, 244, 252);
   --bg-green: rgb(218, 245, 240);
   --bg-dark: rgb(26, 29, 32);
+  --bg-white: rgb(253, 253, 253);
 
   /* Accents */
   --color-star: gold;
@@ -75,6 +76,9 @@
 .bg-green {
   background-color: var(--bg-green) !important;
 }
+.bg-white {
+  background-color: var(--bg-white) !important;
+}
 
 #root {
   font-family: "Epilogue", Helvetica, Arial, sans-serif;
@@ -99,14 +103,20 @@
 /* Neo-Brutalism Shadow  */
 .neo-shadow {
   box-shadow: 4px 4px 0px 0px rgb(0, 0, 0) !important;
-  &:hover {
+  &:hover:not(.fix-shadow) {
     box-shadow: 6px 6px 0px 0px rgb(0, 0, 0) !important;
     transform: translateY(-2px) translateX(-2px);
   }
-  &:active {
+  &:active:not(.fix-shadow) {
     box-shadow: 2px 2px 0px 0px rgb(0, 0, 0) !important;
     transform: translateY(0) translateX(0);
   }
+}
+/* Neo-Brutalism Form for SignIn and SignUp  */
+.neo-form {
+  max-width: 400px;
+  background-color: var(--bg-white);
+  margin-top: 2rem;
 }
 
 a {
